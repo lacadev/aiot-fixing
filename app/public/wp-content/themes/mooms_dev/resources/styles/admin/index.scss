@@ -67,3 +67,15 @@ button[data-toggle="password-toggle"] {
     color: #fff !important;
     z-index: 99;
 }
+
+.container-carbon_fields_container_description_mo_ta {
+    .cf-rich-text {
+        min-height: 300px;
+    }
+
+    .cf-field__body,
+    .carbon-wysiwyg,
+    .wp-editor-container {
+        height: 100%;
+    }
+}

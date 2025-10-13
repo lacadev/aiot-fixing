@@ -40,6 +40,7 @@ add_action('init', function () {
             ),
             'hierarchical'      => true,
             'show_ui'           => true,
+            'show_in_rest'      => true,
             'show_admin_column' => true,
             'query_var'         => true,
             'rewrite'           => array('slug' => 'project-category'),

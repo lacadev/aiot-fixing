@@ -439,7 +439,12 @@ function setupMenuMobile() {
  * Using library select2
  */
 function setupSelect2() {
-  $('.js-example-basic-multiple').select2();
+  $('.js-example-basic-multiple').select2({
+    placeholder: {
+      id: '-1', // the value of the option
+      text: 'Select an category'
+    }
+  });
 }
 
 /**

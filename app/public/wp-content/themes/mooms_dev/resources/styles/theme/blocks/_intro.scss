@@ -4,6 +4,9 @@
 .block-intro {
     --gap: 3rem;
 
+    position: relative;
+    overflow: hidden;
+
     &.reversed {
         .inner {
             flex-direction: row-reverse;

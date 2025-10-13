@@ -8,185 +8,80 @@
  *
  * @package WPEmergeTheme
  */
+$term = get_queried_object();
 ?>
 
 <div class="page-listing">
-	<div class="mm-container">
-		<div class="breadcrumb-top">
-			<?php theBreadcrumb() ?>			
+	<div class="page-header border-line-bottom">
+		<div class="mm-container">
+			<?php
+			get_template_part('template-parts/breadcrumb');
+			echo '<h1 class="page-title">' . get_the_title() . '</h1>';
+			?>
 		</div>
-		<gh1 class="title-block"><?php thePageTitle(); ?></gh1>
+	</div>
 
-		<div class="line-divider"></div>
+	<div class="mm-container">
+		<div class="select-box">
+			<select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+				<?php
+				$terms = get_terms([
+					'taxonomy' => 'project_cat',
+					'hide_empty' => false,
+				]);
+				foreach ($terms as $term) {
+					echo '<option value="' . $term->slug . '">' . $term->name . '</option>';
+				}
+				?>
+			</select>
+		</div>
+
 		<div class="list-project">
-			<p class="title-select-box">Filter project by technology</p>
-			<div class="select-box">
-				<select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-					<option value="rjs">ReactJS</option>
-					<option value="wp">WordPress</option>
-					<option value="njs">NodeJS</option>
-					<option value="scss">SCSS</option>
-					<option value="php">PHP</option>
-					<option value="jv">Java</option>
-					<option value="js">Javascript</option>
-				</select>
-			</div>
+			<?php
+			if (have_posts()) :
+				while (have_posts()) : the_post();
+					?>
+					<?php
+						// Prepare category slugs for filtering via JS
+						$project_terms = get_the_terms(get_the_ID(), 'project_cat');
+						$term_slugs = (!empty($project_terms) && !is_wp_error($project_terms)) ? wp_list_pluck($project_terms, 'slug') : [];
+						$data_value = esc_attr(implode(' ', array_map('sanitize_title', $term_slugs)));
+					?>
+					<div class="project-item" data-value="<?php echo $data_value; ?>">
+						<div class="project-item__content">
+							<div class="project-item__tags">
+								<?php $system_destination = getPostMeta('system_destination'); ?>
+								<?php foreach ($system_destination as $item) { ?>
+									<span class="project-item__tag"><?php echo $item['content']; ?></span>
+								<?php } ?>
+							</div>
 
-			<section class="project-item" data-value="wp">
-				<div class="project-item__content">
-					<div class="project-item__tags">
-						<a href="#" class="project-item__tag">Lorem Tag</a>
-						<a href="#" class="project-item__tag">Ipsum Label</a>
+							<h2 class="project-item__title">
+								<a href="<?php the_permalink(); ?>" class="project-item__link"><?php the_title(); ?></a>
+							</h2>
+
+							<div class="project-item__description">
+								<?php echo apply_filters('the_content', getPostMeta('description')); ?>
+							</div>
+						</div>
+
+						<?php
+						$color = getPostMeta('color');
+						?>
+						<div class="project-item__image" style="--bg-color: <?php echo $color ? $color : ''; ?>;">
+							<a href="<?php the_permalink(); ?>" class="project-item__image-link">
+								<figure class="project-item__figure">
+									<img src="<?php echo getPostThumbnailUrl(get_the_ID()) ?>" alt="<?php the_title(); ?>" loading="lazy">
+								</figure>
+							</a>
+						</div>
 					</div>
-
-					<h2 class="project-item__title">
-						<a href="#" class="project-item__link">Lorem Ipsum Dolor System</a>
-					</h2>
-
-					<p class="project-item__description">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-						Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at
-						nibh elementum imperdiet. Duis sagittis ipsum.
-					</p>
-
-					<ul class="project-item__list">
-						<li class="project-item__list-item">Lorem ipsum dolor sit.</li>
-						<li class="project-item__list-item">
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-						</li>
-						<li class="project-item__list-item">
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-						</li>
-					</ul>
-				</div>
-
-				<div class="project-item__image" style="--bg-color: rgba(0, 180, 255, 0.2);">
-					<a href="#" class="project-item__image-link">
-						<figure class="project-item__figure">
-							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
-								alt="Project Test 1"
-								loading="lazy">
-						</figure>
- 					</a>
-				</div>
-			</section>
-
-			<section class="project-item" data-value="wp js">
-				<div class="project-item__content">
-					<div class="project-item__tags">
-						<a href="#" class="project-item__tag">Lorem Tag</a>
-						<a href="#" class="project-item__tag">Ipsum Label</a>
-					</div>
-
-					<h2 class="project-item__title">
-						<a href="#" class="project-item__link">Lorem Ipsum Dolor System</a>
-					</h2>
-
-					<p class="project-item__description">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-						Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at
-						nibh elementum imperdiet. Duis sagittis ipsum.
-					</p>
-
-					<ul class="project-item__list">
-						<li class="project-item__list-item">Lorem ipsum dolor sit.</li>
-						<li class="project-item__list-item">
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-						</li>
-						<li class="project-item__list-item">
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-						</li>
-					</ul>
-				</div>
-
-				<div class="project-item__image" style="--bg-color: rgba(255, 150, 80, 0.2);">
-					<a href="#" class="project-item__image-link">
-						<figure class="project-item__figure">
-							<img src="<?php echo get_template_directory_uri(); ?>/project-test-2.png"
-								alt="Project Test 2"
-								loading="lazy">
-						</figure>
-					</a>
-				</div>
-			</section>
-
-			<section class="project-item" data-value="wp">
-				<div class="project-item__content">
-					<div class="project-item__tags">
-						<a href="#" class="project-item__tag">Lorem Tag</a>
-						<a href="#" class="project-item__tag">Ipsum Label</a>
-					</div>
-
-					<h2 class="project-item__title">
-						<a href="#" class="project-item__link">Lorem Ipsum Dolor System</a>
-					</h2>
-
-					<p class="project-item__description">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-						Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at
-						nibh elementum imperdiet. Duis sagittis ipsum.
-					</p>
-
-					<ul class="project-item__list">
-						<li class="project-item__list-item">Lorem ipsum dolor sit.</li>
-						<li class="project-item__list-item">
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-						</li>
-						<li class="project-item__list-item">
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-						</li>
-					</ul>
-				</div>
-
-				<div class="project-item__image" style="--bg-color: rgba(0, 200, 150, 0.2);">
-					<a href="#" class="project-item__image-link">
-						<figure class="project-item__figure">
-							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
-								alt="Project Test 1"
-								loading="lazy">
-						</figure>
-					</a>
-				</div>
-			</section>
-
-			<section class="project-item" data-value="wp">
-				<div class="project-item__content">
-					<div class="project-item__tags">
-						<a href="#" class="project-item__tag">Lorem Tag</a>
-						<a href="#" class="project-item__tag">Ipsum Label</a>
-					</div>
-
-					<h2 class="project-item__title">
-						<a href="#" class="project-item__link">Lorem Ipsum Dolor System</a>
-					</h2>
-
-					<p class="project-item__description">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-						Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at
-						nibh elementum imperdiet. Duis sagittis ipsum.
-					</p>
-
-					<ul class="project-item__list">
-						<li class="project-item__list-item">Lorem ipsum dolor sit.</li>
-						<li class="project-item__list-item">
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-						</li>
-						<li class="project-item__list-item">
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-						</li>
-					</ul>
-				</div>
-
-				<div class="project-item__image" style="--bg-color: rgba(0, 180, 255, 0.2);">
-					<a href="#" class="project-item__image-link">
-						<figure class="project-item__figure">
-							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
-								alt="Project Test 1"
-								loading="lazy">
-						</figure>
-					</a>
-				</div>
-			</section>
+					<?php
+				endwhile;
+				wp_reset_postdata();
+			endif;
+			thePagination();
+			?>
 		</div>
 	</div>
 </div>

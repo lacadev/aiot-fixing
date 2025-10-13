@@ -1,33 +1,6 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
-// Line
-.line-divider {
-  position: relative;
-  margin-top: 5rem;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
-  }
-
-  &::after {
-    background: rgba(37, 30, 28, 0.1);
-  }
-
-  &::before {
-    background: $primaryColor;
-    transform: scaleX(0.2);
-    transform-origin: left center;
-    transition: transform 0.4s ease-out;
-  }
-}
-
 // Select box
 .title-select-box {
   margin: 8rem auto 0;
@@ -103,24 +76,21 @@
     }
   }
 
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   &__tag {
     display: inline-block;
-    margin-right: 1rem;
     padding: 0.5rem 1rem;
-    border: 1px solid $yellowColor;
     border-radius: 0.5rem;
     color: $textColor;
     background-color: $yellowColor;
-    transition: all 0.3s ease;
     cursor: pointer;
 
     @include resFont(1.4, 1.6);
-
-    &:hover {
-      background-color: #fff;
-      color: darken($yellowColor, 10%);
-      transform: translateY(-2px);
-    }
   }
 
   &__title {
@@ -149,29 +119,29 @@
 
   &__description {
     margin-bottom: 1.5rem;
-  }
 
-  &__list {
-    list-style: none;
+    ul {
+      list-style: none;
 
-    &-item {
-      position: relative;
-      margin-bottom: 1.5rem;
-      padding-left: 3.5rem;
-
-      &::before {
-        margin-top: -0.1rem;
-
-        @include iconify-mask(
-          "ant-design:check-circle-outlined",
-          2.3rem,
-          2.3rem,
-          $color: $primaryColor
-        );
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
+      li {
+        position: relative;
+        margin-bottom: 1.5rem;
+        padding-left: 3.5rem;
+  
+        &::before {
+          margin-top: -0.1rem;
+  
+          @include iconify-mask(
+            "ant-design:check-circle-outlined",
+            2.3rem,
+            2.3rem,
+            $color: $primaryColor
+          );
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
       }
     }
   }
@@ -212,7 +182,7 @@
     img {
       position: relative;
       z-index: 2;
-      max-width: 90%;
+      // max-width: 90%;
       border-radius: 1rem;
       transition: transform 0.4s ease;
     }
@@ -236,9 +206,9 @@
       }
 
       img {
-        transform: translateX(
-          calc(((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 1.75rem)
-        );
+        // transform: translateX(
+        //   calc(((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 1.75rem)
+        // );
       }
     }
   }
