@@ -29,8 +29,8 @@
       transition: all 0.5s ease;
 
       svg {
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 2.3rem;
+        height: 2.3rem;
         transition: transform 0.6s ease, fill 0.3s ease;
         path {
           fill: currentColor !important;
@@ -51,7 +51,7 @@
       }
 
       &:hover svg {
-        animation: arrowSlideLeft 1.2s ease-in-out 1;
+        animation: arrowSlideLeft 0.4s ease-in-out 1;
       }
     }
 
@@ -59,7 +59,7 @@
       transform: translate(20%, -30%);
 
       &:hover svg {
-        animation: arrowSlideRight 1.2s ease-in-out 1;
+        animation: arrowSlideRight 0.4s ease-in-out 1;
       }
     }
   }
