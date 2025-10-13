@@ -360,9 +360,9 @@ function setupMenuMobile() {
   const menuItems    = document.querySelectorAll(".mobile-menu__menu li");
   const globalBtn    = menuContent?.querySelector(".mobile-menu__header .language .global");
   const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
+  const modal         = document.querySelector(".list-modal");
+  const overlay       = document.querySelector('.list-modal__overlay');
   const listMenuToggleBtn = document.querySelector(".list-menu__toggle");
-  const modal = document.querySelector(".list-modal");
-  const overlay = document.querySelector('.list-modal__overlay');
 
   const hideHeader = () => mobileHeader?.classList.add("hidden");
   const showHeader = () => mobileHeader?.classList.remove("hidden");
@@ -386,23 +386,11 @@ function setupMenuMobile() {
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  closeBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-
-    // Hide menu
-    menuContent?.classList.remove("active");
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
-    showHeader();
-
-    // Back to postion before 
-    const scrollY = parseInt(document.body.style.top || "0") * -1;
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: scrollY, behavior: "instant" });
-    });
+  // Hover nav-menu li dropdown
+  dropdownItems.forEach((item) => {
+    if (item.querySelector(".sub-menu")) {
+      item.classList.add("has-submenu");
+    }
   });
 
   // Tonggle languge
@@ -413,33 +401,88 @@ function setupMenuMobile() {
     }
   });
 
+  // Close mobile menu button
+  closeBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    // Hide menu
+    menuContent?.classList.remove("active");
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+    showHeader();
+
+    // Reset all submenu to close statement
+    menuItems.forEach((item) => {
+      if (item.classList.contains("open")) {
+        const submenu = item.querySelector(".sub-menu");
+        if (submenu) {
+          submenu.style.maxHeight = "0";
+          submenu.style.opacity = "0";
+        }
+        item.classList.remove("open");
+      }
+    });
+
+    // Back to scroll position
+    const scrollY = parseInt(document.body.style.top || "0") * -1;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, behavior: "instant" });
+    });
+  });
+
   // Handle sub-menu open
   menuItems.forEach((item) => {
-    const submenu = item.querySelector(".sub-menu");
+    const submenu = item.querySelector('.sub-menu');
+    const link = item.querySelector('a');
 
-    if (submenu) {
-      item.classList.add("has-submenu");
+    if (!submenu || !link) return;
 
-      const link = item.querySelector("a");
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        item.classList.toggle("open");
-      });
+    item.classList.add('has-submenu');
+
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const open = item.classList.toggle('open');
+      submenu.style.maxHeight = open ? submenu.scrollHeight + 'px' : 0;
+      submenu.style.opacity = open ? '1' : '0';
+    });
+  });
+
+  // Open list-content modal
+  listMenuToggleBtn.addEventListener('click', () => {
+    const isActive = modal.classList.contains('active');
+    if (!isActive) {
+      modal.classList.add('active');
+      listMenuToggleBtn.classList.add('active');
+    } else {
+      closeModal();
     }
   });
 
+  overlay.addEventListener('click', closeModal);
 
-  dropdownItems.forEach((item) => {
-    if (item.querySelector(".sub-menu")) {
-      item.classList.add("has-submenu");
-    }
-  });
+  function closeModal() {
+    modal.classList.add('closing');
+    listMenuToggleBtn.classList.remove('active');
+
+    setTimeout(() => {
+      modal.classList.remove('active', 'closing');
+    }, 400);
+  }
 }
+
 /**
  * Using library select2
  */
 function setupSelect2() {
-  $('.js-example-basic-multiple').select2();
+  $('.js-example-basic-multiple').select2({
+    placeholder: {
+      id: '-1', // the value of the option
+      text: 'Select an category'
+    }
+  });
 }
 
 /**

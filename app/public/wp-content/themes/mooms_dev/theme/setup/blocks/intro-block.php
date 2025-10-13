@@ -80,109 +80,111 @@ Block::make(__('Block Intro', 'gaumap'))
     $video = !empty($fields['video']) ? esc_url($fields['video']) : '';
     $sliders = !empty($fields['img_slider']) ? $fields['img_slider'] : '';
 ?>
-    <section class="block-intro <?= $reversed; ?>">
-        <div class="inner">
-            <div class="intro-content">
-                <?php if ($title): ?>
-                    <h2 class="block-title border-line-top"><?= $title; ?></h2>
-                <?php endif; ?>
+    <section class="block-intro <?php echo $reversed;?> full-width">
+        <div class="container">
+            <div class="inner">
+                <div class="intro-content">
+                    <?php if ($title): ?>
+                        <h2 class="block-title border-line-top"><?= $title; ?></h2>
+                    <?php endif; ?>
+                    
+                    <div class="mb-media">
+                        <?php 
+                        if ($mediaType == 'image' && $image):
+                            
+                            echo '<figure class="media">
+                                    <img src=" ' . $image . ' " alt="image" loading="lazy">
+                                    </figure>';
+
+                        elseif ($mediaType == 'video' && $video):
+                            echo getVideoUrl($video);
+                        elseif ($mediaType == 'slider' && $sliders): ?>
+                            <div class="slider">
+                                <div class="slider-track">
+                                    <?php 
+                                    $i = 1; 
+                                    foreach ($sliders as $slider): 
+                                        echo '<div class="item-slider"><div class="inner">
+                                        <figure class="media-custom"><img src="' . getImageUrlById($slider) . '" alt="slider-'. $i .'" loading="lazy"></figure></div></div>';
+                                        $i++;
+                                    endforeach;
+                                    
+                                    foreach ($sliders as $slider): 
+                                        echo '<div class="item-slider"><div class="inner">
+                                        <figure class="media-custom"><img src="' . getImageUrlById($slider) . '" alt="slider-'. $i .'" loading="lazy"></figure></div></div>';
+                                        $i++;
+                                    endforeach;
+                                    ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <?php if ($desc): ?>
+                        <p class="block-desc"><?= $desc; ?></p>
+                    <?php endif; ?>
+                    
+                    <?php if ($url): ?>
+                        <a class="btn-url" href="<?= $url; ?>">
+                            <span class="_circle"></span>
+                            <span class="_label"><?= _e('View More','gaumap');?></span>
+                            <span class="_icon">
+                                <div class="mm-svg"></div>
+                            </span>
+                        </a>
+                    <?php endif; ?>
+                </div>
                 
-                <div class="mb-media">
+                <div class="pc-media">
                     <?php 
                     if ($mediaType == 'image' && $image):
                         
                         echo '<figure class="media">
-                                <img src=" ' . $image . ' " alt="image" loading="lazy">
-                                </figure>';
-
+                            <img src=" ' . $image . ' " alt="image" loading="lazy">
+                        </figure>';
+                        
                     elseif ($mediaType == 'video' && $video):
+
                         echo getVideoUrl($video);
+                        
                     elseif ($mediaType == 'slider' && $sliders): ?>
                         <div class="slider">
                             <div class="slider-track">
                                 <?php 
                                 $i = 1; 
                                 foreach ($sliders as $slider): 
-                                    echo '<div class="item-slider"><div class="inner">
-                                    <figure class="media-custom"><img src="' . getImageUrlById($slider) . '" alt="slider-'. $i .'" loading="lazy"></figure></div></div>';
+                                ?>
+                                    <div class="item-slider">
+                                        <div class="inner">
+                                            <figure class="media-custom">
+                                                <img src="<?= getImageUrlById($slider); ?>" alt="slider-<?= $i ?>" loading="lazy">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                <?php
                                     $i++;
                                 endforeach;
-                                
+                                ?>
+                                <!-- Copy các item để tạo hiệu ứng nối tiếp liên tục -->
+                                <?php 
                                 foreach ($sliders as $slider): 
-                                    echo '<div class="item-slider"><div class="inner">
-                                    <figure class="media-custom"><img src="' . getImageUrlById($slider) . '" alt="slider-'. $i .'" loading="lazy"></figure></div></div>';
+                                ?>
+                                    <div class="item-slider">
+                                        <div class="inner">
+                                            <figure class="media-custom">
+                                                <img src="<?= getImageUrlById($slider); ?>" alt="slider-<?= $i ?>" loading="lazy">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                <?php
                                     $i++;
                                 endforeach;
                                 ?>
                             </div>
                         </div>
+
                     <?php endif; ?>
                 </div>
-                
-                <?php if ($desc): ?>
-                    <p class="block-desc"><?= $desc; ?></p>
-                <?php endif; ?>
-                
-                <?php if ($url): ?>
-                    <a class="btn-url" href="<?= $url; ?>">
-                        <span class="_circle"></span>
-                        <span class="_label"><?= _e('View More','gaumap');?></span>
-                        <span class="_icon">
-                            <div class="mm-svg"></div>
-                        </span>
-                    </a>
-                <?php endif; ?>
-            </div>
-            
-            <div class="pc-media">
-                <?php 
-                if ($mediaType == 'image' && $image):
-                    
-                    echo '<figure class="media">
-                        <img src=" ' . $image . ' " alt="image" loading="lazy">
-                    </figure>';
-                    
-                elseif ($mediaType == 'video' && $video):
-
-                    echo getVideoUrl($video);
-                    
-                elseif ($mediaType == 'slider' && $sliders): ?>
-                    <div class="slider">
-                        <div class="slider-track">
-                            <?php 
-                            $i = 1; 
-                            foreach ($sliders as $slider): 
-                            ?>
-                                <div class="item-slider">
-                                    <div class="inner">
-                                        <figure class="media-custom">
-                                            <img src="<?= getImageUrlById($slider); ?>" alt="slider-<?= $i ?>" loading="lazy">
-                                        </figure>
-                                    </div>
-                                </div>
-                            <?php
-                                $i++;
-                            endforeach;
-                            ?>
-                            <!-- Copy các item để tạo hiệu ứng nối tiếp liên tục -->
-                            <?php 
-                            foreach ($sliders as $slider): 
-                            ?>
-                                <div class="item-slider">
-                                    <div class="inner">
-                                        <figure class="media-custom">
-                                            <img src="<?= getImageUrlById($slider); ?>" alt="slider-<?= $i ?>" loading="lazy">
-                                        </figure>
-                                    </div>
-                                </div>
-                            <?php
-                                $i++;
-                            endforeach;
-                            ?>
-                        </div>
-                    </div>
-
-                <?php endif; ?>
             </div>
         </div>
     </section>

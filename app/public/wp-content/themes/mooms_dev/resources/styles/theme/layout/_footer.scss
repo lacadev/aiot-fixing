@@ -132,15 +132,21 @@ footer {
             transition: opacity 0.4s ease-out 0s;
             white-space: nowrap;
 
+            @include maxWidth($md){
+                text-underline-offset: 3px;
+            }
+
             @include maxWidth($sm) {
                 position: static;
-                transform: none;
-                opacity: 1;
+                text-align: center;
                 font-size: 1.1rem;
                 line-height: 1.73;
                 letter-spacing: 0.1em;
-                text-align: center;
+                white-space: normal;
+                word-break: break-word;
                 color: #251e1c;
+                transform: none;
+                opacity: 1;
             }
         }
 
@@ -183,8 +189,13 @@ footer {
                 max-width: 18rem;
                 object-fit: contain;
 
-                @include maxWidth($md) {
+                @include maxWidth ($md) {
                     max-width: 15rem;
+                    padding: 0;
+                }
+
+                @include maxWidth ($xs) {
+                    max-width: 12rem;
                 }
             }
 
@@ -260,6 +271,8 @@ footer {
         }
 
         @include maxWidth($md) {
+            margin-top: 2rem;
+
             .nav-menu,
             .info-company {
                 max-width: 100%;
@@ -279,44 +292,12 @@ footer {
             width: 100%;
             @include ulReset;
 
-            .menu-item-level-1 {
-                position: relative;
-
-                &::after,
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 3px;
-                }
-
-                &::after {
-                    width: 100%;
-                    background: rgba(37, 30, 28, 0.1);
-                }
-
-                &::before {
-                    width: 100%;
-                    background: $primaryColor;
-                    transform: scaleX(0.2);
-                    transform-origin: left center;
-                    transition: transform 0.4s ease-out;
-                }
-
-                &:hover {
-                    &::before {
-                        transform: scaleX(1);
-                    }
-                }
-            }
-
             li {
+                position: relative;
                 width: 100%;
                 break-inside: avoid;
 
                 a {
-                    position: relative;
                     width: 100%;
                     display: block;
                     padding: 0.6rem 0;
@@ -326,46 +307,72 @@ footer {
                     line-height: 2;
                     letter-spacing: 0.02em;
                     color: #251e1c;
+
+                    &::after,
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3px;
+                    }
+
+                    &::after {
+                        width: 100%;
+                        background: rgba(37, 30, 28, 0.1);
+                    }
+
+                    &::before {
+                        width: 100%;
+                        background: $primaryColor;
+                        transform: scaleX(0.2);
+                        transform-origin: left center;
+                        transition: transform 0.4s ease-out;
+                    }
+
+                    &:hover {
+                        &::before {
+                            transform: scaleX(1);
+                        }
+                    }
                 }
 
                 ul.nav__dropdown-menu {
                     break-inside: avoid;
                     column-count: unset;
 
-                    li {
-                        a {
-                            display: inline-block;
-                            width: 100%;
-                            font-size: 1.4rem;
-                            font-weight: $regular;
-                            line-height: 1.4;
-                            letter-spacing: 0.04em;
-                            color: $textColor;
-                            text-decoration: underline;
-                            -webkit-text-decoration-color: transparent;
-                            text-decoration-color: transparent;
-                            transition: -webkit-text-decoration-color 0.2s ease-out;
-                            transition: text-decoration-color 0.2s ease-out;
-                            transition:
-                                text-decoration-color 0.2s ease-out,
-                                -webkit-text-decoration-color 0.2s ease-out;
+                    li a {
+                        display: inline-block;
+                        width: auto;
+                        font-size: 1.4rem;
+                        font-weight: $regular;
+                        line-height: 1.4;
+                        letter-spacing: 0.04em;
+                        color: $textColor;
 
-                            &::after {
-                                content: "";
-                                display: block;
-                                position: relative;
-                                bottom: 0.5rem;
-                                width: 100%;
-                                height: 1px;
-                                background: linear-gradient(0deg, #70635f, #70635f) no-repeat right bottom / 0 1px;
-                                background-size: 0 1px;
-                                transition: background-size 0.4s ease-out;
-                            }
+                        &::after {
+                            content: "";
+                            position: relative;
+                            display: block;
+                            bottom: 0.5rem;
+                            width: 0;
+                            height: 1px;
+                            background: linear-gradient(0deg, #70635f, #70635f) no-repeat right bottom / 0 1px;
+                            background-size: 0 1px;
+                            transition: background-size 0.4s ease-out;
 
-                            &:hover::after {
-                                background-size: 100% 1px;
-                                background-position-x: left;
+                            @include maxWidth ($xs) {
+                                display: none;
                             }
+                        }
+
+                        &::before {
+                            display: none;
+                        }
+
+                        &:hover {
+                            text-decoration: underline !important;
+                            text-underline-offset: 5px;
                         }
                     }
                 }
@@ -443,6 +450,7 @@ footer {
                     justify-content: center;
                     max-width: 100%;
                     padding-top: 5px;
+                    margin-top: 1rem;
 
                     a {
                         grid-column: 1 / 2;
@@ -452,6 +460,7 @@ footer {
                         font-weight: $bold;
                         font-size: 1.6rem;
                         color: $textColor;
+                        margin-top: 10px;
                     }
 
                     .submenu-toggle {
@@ -460,6 +469,7 @@ footer {
                         grid-row: 1 / 2;
                         justify-self: end;
                         border: none;
+                        margin-top: 1rem;
                         width: 2rem;
                         height: 2rem;
                         background: none;
@@ -508,7 +518,7 @@ footer {
                         width: 100%;
                         text-align: left;
                         padding-left: 1rem;
-                        margin-top: 0.5rem;
+                        margin-bottom: 0.5rem;
                         max-height: 0;
                         opacity: 0;
                         overflow: hidden;
@@ -517,11 +527,20 @@ footer {
                             opacity 0.4s ease;
 
                         li {
+                            display: block;
+                            width: 100%;
                             opacity: 0;
+                            margin-top: 0;
+                            margin-bottom: .5rem;
                             transform: translateY(-8px);
                             transition:
                                 opacity 0.4s ease,
                                 transform 0.4s ease;
+
+                            a {
+                                width: 100%;
+                                margin-top: 5px;
+                            }
                         }
 
                         &.is-active {
@@ -541,14 +560,10 @@ footer {
     }
 
     .copyright {
-        padding: 2rem 0;
+        padding: 4rem 0;
 
         @include maxWidth ($md) {
-            padding: 0 0 7.5rem 0;
-        }
-
-        @include maxWidth ($xs) {
-            padding: 2rem 0 9rem 0;
+            padding: 2.5rem 0 8.5rem 0;
         }
     }
 }

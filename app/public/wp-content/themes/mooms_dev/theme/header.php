@@ -88,8 +88,8 @@
 
 					<div class="language">
 						<div class="global">
-							<?php theLanguageSwitcher();?>
 						</div>
+						<?php theLanguageSwitcher();?>
 						<div class="current-language">
 							<?php
 							$current_language_name = pll_current_language('name');
@@ -114,7 +114,7 @@
 		</header>
 
 		<div id="list-content" class="list-content">
-			<aside class="list-menu">
+			<aside class="list-menu ">
 				<button class="list-menu__toggle" type="button">
 					<span class="list-menu__label">Business List</span>
 					<span class="list-menu__icon">
@@ -124,7 +124,7 @@
 					</span>
 				</button>
 
-				<div class="list-modal">
+				<div class="list-modal mm-container">
 					<div class="list-modal__overlay">
 					</div>
 					<div class="list-modal__content">
@@ -159,9 +159,10 @@
 			?>
 
 			<!-- Menu -->
-			<div class="mobile-header__item mobile-header__menu-dropdown">
+			<div class="mobile-header__menu-dropdown">
 				<button type="button" class="mobile-header__menu-toggle">
 					<span class="iconify" data-icon="mdi:menu"></span>
+					<a class="menu-tongle__label">Menu</a>
 				</button>
 			</div>
 		</div>
