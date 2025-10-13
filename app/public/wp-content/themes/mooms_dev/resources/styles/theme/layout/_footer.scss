@@ -2,7 +2,7 @@
 @use "../utilities/mixin.scss" as *;
 
 footer {
-    padding: 5rem 0;
+    padding: 5rem 0 0;
     background-color: #f4f4f4;
     .footer-top {
         padding: 5rem 0;
@@ -173,10 +173,19 @@ footer {
 
             @include maxWidth($md) {
                 border-right: none;
+                padding: 0;
             }
 
             img {
-                max-width: 50%;
+                padding: 1rem 0;
+                height: auto;
+                width: 100%;
+                max-width: 18rem;
+                object-fit: contain;
+
+                @include maxWidth($md) {
+                    max-width: 15rem;
+                }
             }
 
             .info {
@@ -185,12 +194,14 @@ footer {
                     font-size: clamp(1.4rem, 2.5vw, 1.6rem);
                 }
             }
+
             .company {
                 margin-top: 2rem;
                 font-size: clamp(1.4rem, 2.5vw, 1.6rem);
                 font-weight: 600;
                 line-height: 2.2;
             }
+
             .google-map a {
                 display: inline-block;
                 &::after {
@@ -204,6 +215,7 @@ footer {
                     background-size: 100% 1px;
                     transition: background-size 0.3s ease-out;
                 }
+
                 &:hover::after {
                     background-size: 0 1px;
                     background-position-x: right;
@@ -220,23 +232,24 @@ footer {
                     color: $primaryColor;
                 }
             }
+
             .contact {
                 margin-top: 2rem;
                 padding: 2rem 0;
                 border-top: 1px solid rgba(0, 0, 0, 0.1);
             }
+
             .icon-phone {
                 @include iconify-mask("fluent:phone-28-regular", 2rem, 2rem, $primaryColor);
             }
+
             .icon-mail {
                 @include iconify-mask("fluent:mail-28-regular", 2rem, 2rem, $primaryColor);
             }
         }
 
         .nav-menu {
-            padding-top: clamp(3rem, 2.5vw, 5rem);
-            padding-bottom: clamp(3rem, 2.5vw, 5rem);
-            padding-left: clamp(3rem, 2.5vw, 5rem);
+            padding: 5rem 0 5rem 5rem;
             max-width: 65%;
             flex: 1 1 65%;
             position: relative;
@@ -254,32 +267,16 @@ footer {
             }
         }
     }
+
     .footer__nav {
         flex: 1;
-        height: calc(25rem + 7.73438vw + 0.78125vw);
+        height: auto;
 
-        @include maxWidth($md) {
-            display: flex;
-            flex: unset;
-            justify-content: space-between;
-            padding: 0.2rem 0 1.2rem;
-            height: auto;
-            border-left: none;
-
-            ul {
-                display: flex;
-                justify-content: space-between;
-                padding: 0.2rem 0 1.2rem;
-                height: auto;
-                border-left: none;
-            }
-        }
         ul {
-            display: inline-flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            gap: 1.7rem 3.4375vw;
+            column-count: 3;
+            gap: 2rem 3rem;
             height: 100%;
+            width: 100%;
             @include ulReset;
 
             .menu-item-level-1 {
@@ -293,10 +290,12 @@ footer {
                     left: 0;
                     height: 3px;
                 }
+
                 &::after {
                     width: 100%;
                     background: rgba(37, 30, 28, 0.1);
                 }
+
                 &::before {
                     width: 100%;
                     background: $primaryColor;
@@ -313,29 +312,33 @@ footer {
             }
 
             li {
-                width: 12.8125vw;
+                width: 100%;
+                break-inside: avoid;
 
                 a {
                     position: relative;
+                    width: 100%;
                     display: block;
                     padding: 0.6rem 0;
-                    width: 100%;
                     font-style: normal;
-                    font-weight: 700;
+                    font-weight: $bold;
                     font-size: 1.6rem;
-                    line-height: 2.91;
-                    letter-spacing: 0.04em;
+                    line-height: 2;
+                    letter-spacing: 0.02em;
                     color: #251e1c;
                 }
 
                 ul.nav__dropdown-menu {
+                    break-inside: avoid;
+                    column-count: unset;
+
                     li {
                         a {
-                            width: fit-content;
                             display: inline-block;
+                            width: 100%;
                             font-size: 1.4rem;
-                            font-weight: 400;
-                            line-height: 1.8;
+                            font-weight: $regular;
+                            line-height: 1.4;
                             letter-spacing: 0.04em;
                             color: $textColor;
                             text-decoration: underline;
@@ -346,6 +349,7 @@ footer {
                             transition:
                                 text-decoration-color 0.2s ease-out,
                                 -webkit-text-decoration-color 0.2s ease-out;
+
                             &::after {
                                 content: "";
                                 display: block;
@@ -355,8 +359,9 @@ footer {
                                 height: 1px;
                                 background: linear-gradient(0deg, #70635f, #70635f) no-repeat right bottom / 0 1px;
                                 background-size: 0 1px;
-                                transition: background-size 0.3s ease-out;
+                                transition: background-size 0.4s ease-out;
                             }
+
                             &:hover::after {
                                 background-size: 100% 1px;
                                 background-position-x: left;
@@ -369,28 +374,181 @@ footer {
                     button.submenu-toggle {
                         display: none;
 
-                        @include maxWidth($md) {
-                            display: block;
-                            background: none;
+                        @include maxWidth($xs) {
+                            display: inline-block;
+                            position: relative;
                             border: none;
+                            margin-left: 8px;
+                            width: 2rem;
+                            height: 2rem;
+                            background: none;
                             cursor: pointer;
-                            margin-left: 10px;
-                            font-size: 1.2rem;
+
+                            &::before,
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                width: 16px;
+                                height: 2px;
+                                background: #251e1c;
+                                transform-origin: center;
+                                transition:
+                                    transform 0.4s ease,
+                                    opacity 0.4s ease;
+                            }
+
+                            &::before {
+                                transform: translate(-50%, -50%) rotate(0deg);
+                            }
+
+                            &::after {
+                                transform: translate(-50%, -50%) rotate(90deg);
+                            }
+
+                            &.is-open::after {
+                                transform: translate(-50%, -50%) rotate(0deg);
+                                opacity: 0;
+                            }
+
+                            &.is-open {
+                                transform: rotate(180deg);
+                                transition: transform 0.4s ease;
+                            }
                         }
                     }
+
                     ul.nav__dropdown-menu {
                         display: block;
+                    }
+                }
+            }
+        }
 
-                        @include maxWidth($md) {
+        @include maxWidth($xs) {
+            ul.nav_menu {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+                gap: 0rem;
+
+                li {
+                    display: grid;
+                    grid-template-columns: 4fr 1fr;
+                    grid-template-rows: auto auto;
+                    align-items: center;
+                    justify-content: center;
+                    max-width: 100%;
+                    padding-top: 5px;
+
+                    a {
+                        grid-column: 1 / 2;
+                        grid-row: 1 / 2;
+                        text-align: left;
+                        padding: 3px;
+                        font-weight: $bold;
+                        font-size: 1.6rem;
+                        color: $textColor;
+                    }
+
+                    .submenu-toggle {
+                        position: relative;
+                        grid-column: 2 / 3;
+                        grid-row: 1 / 2;
+                        justify-self: end;
+                        border: none;
+                        width: 2rem;
+                        height: 2rem;
+                        background: none;
+                        transition: transform 0.35s ease;
+                        cursor: pointer;
+
+                        &::before,
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 16px;
+                            height: 2px;
+                            background: #251e1c;
+                            transform-origin: center;
+                            transition:
+                                transform 0.35s ease,
+                                opacity 0.35s ease;
+                        }
+
+                        &::before {
+                            transform: translate(-50%, -50%) rotate(0deg);
+                        }
+
+                        &::after {
+                            transform: translate(-50%, -50%) rotate(90deg);
+                        }
+
+                        &.is-open {
+                            transform: rotate(45deg);
+                        }
+
+                        &.is-open::after {
+                            opacity: 0;
+                        }
+
+                        .submenu-toggle-icon {
                             display: none;
+                        }
+                    }
+
+                    ul.nav__dropdown-menu {
+                        grid-column: 1 / -1;
+                        grid-row: 2 / 3;
+                        width: 100%;
+                        text-align: left;
+                        padding-left: 1rem;
+                        margin-top: 0.5rem;
+                        max-height: 0;
+                        opacity: 0;
+                        overflow: hidden;
+                        transition:
+                            max-height 0.45s ease,
+                            opacity 0.4s ease;
+
+                        li {
+                            opacity: 0;
+                            transform: translateY(-8px);
+                            transition:
+                                opacity 0.4s ease,
+                                transform 0.4s ease;
                         }
 
                         &.is-active {
-                            display: block;
+                            max-height: 600px;
+                            opacity: 1;
+                            overflow: visible;
+                        }
+
+                        &.is-active li {
+                            opacity: 1;
+                            transform: translateY(0);
                         }
                     }
                 }
             }
+        }
+    }
+
+    .copyright {
+        padding: 2rem 0;
+
+        @include maxWidth ($md) {
+            padding: 0 0 7.5rem 0;
+        }
+
+        @include maxWidth ($xs) {
+            padding: 2rem 0 9rem 0;
         }
     }
 }

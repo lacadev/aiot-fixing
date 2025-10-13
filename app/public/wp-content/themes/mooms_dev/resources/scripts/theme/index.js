@@ -31,6 +31,7 @@ function initializePageFeatures() {
   setupHideHeaderOnScroll();
   setupAjaxSendMail();
   setupMenuMobile();
+  alertDropdownSubMenu();
   setupSelect2();
   setupProjectFilter();
 }
@@ -541,5 +542,21 @@ function setupProjectFilter() {
     if (modal.classList.contains('active')) {
       closeModal();
     }
+  });
+
+}
+
+function alertDropdownSubMenu() {
+  const toggles = document.querySelectorAll(".submenu-toggle");
+
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      const parentLi = this.closest(".has_child_menu");
+      const submenu = parentLi.querySelector(".nav__dropdown-menu");
+
+      submenu.classList.toggle("is-active");
+      this.classList.toggle("is-open");
+    });
   });
 }

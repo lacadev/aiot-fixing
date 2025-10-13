@@ -71,6 +71,11 @@ $home_url = pll_home_url();
 			</div>
 		</div>
 	</div>
+	<div class="copyright">
+		<div class="mm-container text-center">
+			Copyright © AIOT-Global Co. Ltd. All rights Reserved.
+		</div>
+	</div>
 </footer>
 
 </div>
