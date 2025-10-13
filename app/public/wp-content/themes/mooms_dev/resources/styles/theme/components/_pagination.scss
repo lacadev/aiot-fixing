@@ -1,0 +1,71 @@
+@use "../utilities/variables.scss" as *;
+@use "../utilities/mixin.scss" as *;
+
+.pagination {
+  margin-top: 10rem;
+  padding-bottom: 8rem;
+
+  .page-item {
+    position: relative;
+    padding: 0 2rem;
+
+    .prev,
+    .next {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 6rem;
+      height: 6rem;
+      border: 1px solid $primaryColor;
+      background-color: $primaryColor;
+      border-radius: 50%;
+      color: #fff;
+      transition: all 0.3s ease;
+
+      &:hover,
+      &:active {
+        color: #fff;
+      }
+    }
+
+    .prev {
+      transform: translate(-100%, -30%);
+
+      &:hover,
+      &:active {
+        background-color: #fff;
+        color: $primaryColor;
+      }
+    }
+
+    .next {
+      transform: translate(20%, -30%);
+
+      &:hover,
+      &:active {
+        background-color: #fff;
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .page-link {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $semiBold;
+    color: $textColor;
+
+    @include resFont(1.6, 2);
+    transition: color 0.3s ease;
+
+    &:hover,
+    &:active {
+      color: $primaryColor;
+      cursor: pointer;
+    }
+  }
+}
