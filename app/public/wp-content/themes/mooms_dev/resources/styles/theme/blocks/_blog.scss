@@ -2,10 +2,15 @@
 @use "../utilities/mixin.scss" as *;
 
 .block-blog {
-    text-align: center;
-    background-color: #f4f4f4;
+  text-align: center;
+  background-color: #f4f4f4;
 
-    .btn-url {
-        margin-top: 2.5rem;
-    }
+  .btn-url {
+    margin-top: 2.5rem;
+  }
+}
+
+//Pagination css
+.pagination {
+  padding: 4rem 0;
 }

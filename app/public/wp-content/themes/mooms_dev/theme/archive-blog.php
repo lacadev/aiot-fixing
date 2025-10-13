@@ -24,8 +24,8 @@
 				endwhile;
 				wp_reset_postdata();
 			endif;
-			thePagination();
 			?>
 		</div>
+		<?php thePagination();?>
 	</div>
 </div>

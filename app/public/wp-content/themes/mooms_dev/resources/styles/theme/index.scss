@@ -7,6 +7,7 @@
 @use "./base/generic.wordpress.scss" as *;
 @use "./components/section.scss";
 @use "./_sprite.scss";
+@use "./components/pagination.scss";
 
 @use "./layout/general.scss" as *;
 @use "./layout/header.scss" as *;
