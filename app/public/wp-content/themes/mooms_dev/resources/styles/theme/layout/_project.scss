@@ -94,11 +94,17 @@
 
     @include resFont(1.4, 1.6);
 
-    &:hover,
     &.select2-results__option--highlighted {
-      background-color: $yellowColor;
-      color: $textColor;
-      border-color: $yellowColor;
+      background-color: #fff;
+      color: inherit;
+      border-color: #ccc;
+    }
+
+    &:hover,
+    &.select2-results__option--highlighted:hover {
+      background-color: $yellowColor !important;
+      color: $textColor !important;
+      border-color: $yellowColor !important;
     }
 
     &[aria-selected="true"] {
