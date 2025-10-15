@@ -132,15 +132,21 @@ footer {
             transition: opacity 0.4s ease-out 0s;
             white-space: nowrap;
 
+            @include maxWidth($md){
+                text-underline-offset: 3px;
+            }
+
             @include maxWidth($sm) {
                 position: static;
-                transform: none;
-                opacity: 1;
+                text-align: center;
                 font-size: 1.1rem;
                 line-height: 1.73;
                 letter-spacing: 0.1em;
-                text-align: center;
+                white-space: normal;
+                word-break: break-word;
                 color: #251e1c;
+                transform: none;
+                opacity: 1;
             }
         }
 
@@ -154,6 +160,7 @@ footer {
                 ._message {
                     opacity: 1;
                     transition-delay: 0.2s;
+                    text-underline-offset: 1rem;
                 }
             }
         }
@@ -185,6 +192,11 @@ footer {
 
                 @include maxWidth($md) {
                     max-width: 15rem;
+                    padding: 0;
+                }
+
+                @include maxWidth($xs) {
+                    max-width: 12rem;
                 }
             }
 
@@ -260,6 +272,8 @@ footer {
         }
 
         @include maxWidth($md) {
+            margin-top: 2rem;
+
             .nav-menu,
             .info-company {
                 max-width: 100%;
@@ -279,92 +293,80 @@ footer {
             width: 100%;
             @include ulReset;
 
-            .menu-item-level-1 {
-                position: relative;
-
-                &::after,
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 3px;
-                }
-
-                &::after {
-                    width: 100%;
-                    background: rgba(37, 30, 28, 0.1);
-                }
-
-                &::before {
-                    width: 100%;
-                    background: $primaryColor;
-                    transform: scaleX(0.2);
-                    transform-origin: left center;
-                    transition: transform 0.4s ease-out;
-                }
-
-                &:hover {
-                    &::before {
-                        transform: scaleX(1);
-                    }
-                }
-            }
-
             li {
+                position: relative;
                 width: 100%;
                 break-inside: avoid;
 
                 a {
-                    position: relative;
                     width: 100%;
                     display: block;
-                    padding: 0.6rem 0;
+                    padding: 1.5rem 0;
                     font-style: normal;
                     font-weight: $bold;
                     font-size: 1.6rem;
                     line-height: 2;
                     letter-spacing: 0.02em;
                     color: #251e1c;
+
+                    &::after,
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3px;
+                    }
+
+                    &::after {
+                        width: 100%;
+                        background: rgba(37, 30, 28, 0.1);
+                    }
+
+                    &::before {
+                        width: 100%;
+                        background: $primaryColor;
+                        transform: scaleX(0.2);
+                        transform-origin: left center;
+                        transition: transform 0.4s ease-out;
+                    }
+
+                    &:hover {
+                        &::before {
+                            transform: scaleX(1);
+                        }
+                    }
                 }
 
                 ul.nav__dropdown-menu {
                     break-inside: avoid;
                     column-count: unset;
+                    padding-bottom: 1.5rem;
 
-                    li {
+                    li{
+                        padding: 0 0 1rem 0;
+
                         a {
-                            display: inline-block;
-                            width: 100%;
+                            position: relative;
+                            display: inline;
+                            width: auto;
+                            padding: 0;
                             font-size: 1.4rem;
                             font-weight: $regular;
                             line-height: 1.4;
                             letter-spacing: 0.04em;
                             color: $textColor;
-                            text-decoration: underline;
-                            -webkit-text-decoration-color: transparent;
-                            text-decoration-color: transparent;
-                            transition: -webkit-text-decoration-color 0.2s ease-out;
-                            transition: text-decoration-color 0.2s ease-out;
-                            transition:
-                                text-decoration-color 0.2s ease-out,
-                                -webkit-text-decoration-color 0.2s ease-out;
+                            background: linear-gradient(0deg, #70635f, #70635f) no-repeat left bottom / 0 1px;
+                            transition: background-size 0.4s ease, background-position 0.4s ease;
 
-                            &::after {
-                                content: "";
-                                display: block;
-                                position: relative;
-                                bottom: 0.5rem;
-                                width: 100%;
-                                height: 1px;
-                                background: linear-gradient(0deg, #70635f, #70635f) no-repeat right bottom / 0 1px;
-                                background-size: 0 1px;
-                                transition: background-size 0.4s ease-out;
-                            }
-
-                            &:hover::after {
+                            &:hover {
                                 background-size: 100% 1px;
                                 background-position-x: left;
+                            }
+
+                            &::before,
+                            &::after {
+                                display: none;
                             }
                         }
                     }
@@ -442,13 +444,13 @@ footer {
                     align-items: center;
                     justify-content: center;
                     max-width: 100%;
-                    padding-top: 5px;
+                    padding-top: .5rem;
 
                     a {
                         grid-column: 1 / 2;
                         grid-row: 1 / 2;
                         text-align: left;
-                        padding: 3px;
+                        padding: 1rem 0;
                         font-weight: $bold;
                         font-size: 1.6rem;
                         color: $textColor;
@@ -508,7 +510,7 @@ footer {
                         width: 100%;
                         text-align: left;
                         padding-left: 1rem;
-                        margin-top: 0.5rem;
+                        padding-bottom: 0;
                         max-height: 0;
                         opacity: 0;
                         overflow: hidden;
@@ -517,11 +519,19 @@ footer {
                             opacity 0.4s ease;
 
                         li {
+                            display: block;
+                            width: 100%;
                             opacity: 0;
+                            padding-bottom: 1.5rem;
                             transform: translateY(-8px);
                             transition:
                                 opacity 0.4s ease,
                                 transform 0.4s ease;
+
+                            a {
+                                width: 100%;
+                                margin-top: 5px;
+                            }
                         }
 
                         &.is-active {
@@ -541,14 +551,10 @@ footer {
     }
 
     .copyright {
-        padding: 2rem 0;
+        padding: 4rem 0;
 
-        @include maxWidth ($md) {
-            padding: 0 0 7.5rem 0;
-        }
-
-        @include maxWidth ($xs) {
-            padding: 2rem 0 9rem 0;
+        @include maxWidth($md) {
+            padding: 2.5rem 0 8.5rem 0;
         }
     }
 }
