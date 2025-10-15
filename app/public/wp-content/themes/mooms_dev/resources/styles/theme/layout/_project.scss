@@ -14,40 +14,98 @@
   justify-content: center;
   border: 1px solid #ccc;
   border-radius: 2rem;
-  padding: 0.4rem 0.8rem;
   margin: 2rem auto 0;
   background-color: #fff;
   max-width: 70rem;
 
   // Select2
-  .select2-container,
-  .select2-container--default .select2-selection--multiple {
-    border: none !important;
+  .select2-container {
     width: 100% !important;
-  }
+    border: none !important;
 
-  .select2-container--default
-    .select2-selection--multiple
-    .select2-selection__choice {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.2em 0.5rem 0 0;
-    padding: 0.4rem 1.5rem 0.4rem 0.5rem;
-    border: none;
-    border-radius: 3rem;
-    font-size: 14px;
-    background-color: $yellowColor;
-  }
+    .selection {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      height: 4.1rem;
+    }
+    // Multiple selection box
+    &--default {
+      .select2-search--inline .select2-search__field {
+        padding: 0.5rem 1.5rem;
+      }
 
-  .select2-selection__choice__remove {
-    color: #fff !important;
-    padding: 0 0.25rem 0.25rem 0.5rem;
+      .select2-selection--multiple {
+        border: none !important;
+        background-color: transparent;
+
+        .select2-selection__rendered {
+          padding-left: 0;
+        }
+
+        .select2-selection__choice {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0.45rem 0.1rem 0 0.5rem;
+          padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+          border: none;
+          border-radius: 3rem;
+          background-color: $yellowColor;
+
+          @include resFont(1.4, 1.6);
+
+          .select2-selection__choice__remove {
+            color: #fff !important;
+            padding: 0 0.25rem 0.25rem 0.5rem;
+          }
+        }
+      }
+    }
   }
 }
 
+// Dropdown Style
 .select2-dropdown {
-  margin-top: 4rem;
+  margin: 0.5rem 0 2rem 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+
+  .select2-results__options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    max-height: 9rem !important;
+    padding: 0.5rem;
+    list-style: none;
+    overflow-y: auto;
+  }
+
+  .select2-results__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: 3rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+    @include resFont(1.4, 1.6);
+
+    &:hover,
+    &.select2-results__option--highlighted {
+      background-color: $yellowColor;
+      color: $textColor;
+      border-color: $yellowColor;
+    }
+
+    &[aria-selected="true"] {
+      display: none;
+    }
+  }
 }
 
 // Project item
@@ -56,9 +114,13 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 3rem;
-  margin: 10rem 0;
+  margin: 8rem 0;
   padding: 0;
   color: $textColor;
+
+  &:first-child {
+    margin-top: 19rem;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -127,20 +189,20 @@
         position: relative;
         margin-bottom: 1.5rem;
         padding-left: 3.5rem;
-  
+
         &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
           margin-top: -0.1rem;
-  
+
           @include iconify-mask(
             "ant-design:check-circle-outlined",
             2.3rem,
             2.3rem,
             $color: $primaryColor
           );
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 0;
         }
       }
     }
@@ -155,11 +217,25 @@
     padding: 2rem;
     background-color: rgba($yellowColor, 0.2);
 
+    .project-item__image-link,
+    .project-item__figure {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .project-item__figure {
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
     img {
       position: relative;
       z-index: 2;
-      max-width: 90%;
-      border-radius: 1rem;
+      display: block;
     }
   }
 
@@ -176,13 +252,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3rem;
     background-color: var(--bg-color);
-    padding: 2rem;
 
     img {
       position: relative;
       z-index: 2;
-      // max-width: 90%;
       border-radius: 1rem;
       transition: transform 0.4s ease;
     }
@@ -204,12 +279,6 @@
         left: 100%;
         width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
       }
-
-      img {
-        // transform: translateX(
-        //   calc(((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 1.75rem)
-        // );
-      }
     }
   }
 
@@ -219,13 +288,20 @@
         right: 100%;
         width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
       }
-
-      img {
-        transform: translateX(
-          calc(-1 * (((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 6rem))
-        );
-      }
     }
+  }
+}
+
+// Image place
+.project-item {
+  &:nth-child(odd) .project-item__image {
+    justify-content: flex-end;
+    padding-right: 0;
+  }
+
+  &:nth-child(even) .project-item__image {
+    justify-content: flex-start;
+    padding-left: 0;
   }
 }
 
@@ -234,7 +310,7 @@
   text-align: center;
   font-weight: $semiBold;
   color: $primaryColor;
-  margin: 0;
+  margin: 10rem 0 0 0;
   padding: 8rem 0;
 
   @include resFont(2, 3.2);
@@ -243,6 +319,10 @@
 // Responsive - Laptop 1440
 @include maxWidth($xl) {
   .project-item {
+    &:first-child {
+      margin-top: 16rem;
+    }
+
     &:nth-child(odd) {
       .project-item__image {
         &::after {
@@ -263,12 +343,30 @@
   }
 }
 
-// Responsive - Mobile
+// Responsive - Laptop 1200
+@include maxWidth($lg) {
+  .select2-dropdown .select2-results__options {
+    max-height: 8.7rem !important;
+  }
+}
+
+// Responsive - Mobile/tablet 768
 @include maxWidth($sm) {
+  .select-box
+    .select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    margin: 0.55rem 0.1rem 0 0.5rem;
+  }
+
   .project-item {
     grid-template-columns: 1fr;
     gap: 0rem;
-    margin: 4rem 0;
+    margin: 5rem 0;
+
+    &:first-child {
+      margin-top: 12rem;
+    }
 
     &:nth-child(even) {
       direction: ltr;
@@ -285,6 +383,7 @@
     &__image {
       justify-content: center;
       margin-bottom: 2rem;
+      padding: 2rem 0 !important;
 
       img {
         width: 100%;
@@ -311,8 +410,11 @@
       }
     }
   }
+}
 
-  .select2-dropdown {
-    margin-top: 5.25rem;
+// Responsive - Mobi 576
+@include maxWidth($xs) {
+  .select2-dropdown .select2-results__options {
+    max-height: 8.6rem !important;
   }
 }
