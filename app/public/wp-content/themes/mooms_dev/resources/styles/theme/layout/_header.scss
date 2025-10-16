@@ -54,7 +54,7 @@ header {
             padding: 1rem 0;
             height: auto;
             width: 100%;
-            max-width: 18rem;
+            max-width: 17rem;
             object-fit: contain;
 
             @include maxWidth($md) {
@@ -351,7 +351,9 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1.2rem 2rem;
+        text-align: center;
+        max-width: 10rem;
+        padding: 1rem 2rem;
         background-color: $primaryColor;
         transition: all 0.2s ease-in-out 0s;
 
@@ -767,10 +769,6 @@ header {
                     img {
                         width: 1.5rem;
                     }
-
-                    &:hover {
-                        color: $primaryColor;
-                    }
                 }
             }
         }
@@ -871,7 +869,7 @@ header {
 
         .mobile-menu__content {
             flex: 1;
-            max-height: calc(100vh - 20rem);
+            max-height: calc(100vh - 22rem);
             overflow-y: auto;
         }
 
