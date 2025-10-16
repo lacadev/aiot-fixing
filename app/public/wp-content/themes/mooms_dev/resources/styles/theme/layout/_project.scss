@@ -112,6 +112,10 @@
     }
   }
 }
+// List project
+.list-project {
+  margin-top: 12rem;
+}
 
 // Project item
 .project-item {
@@ -122,10 +126,6 @@
   margin: 8rem 0;
   padding: 0;
   color: $textColor;
-
-  &:first-child {
-    margin-top: 19rem;
-  }
 
   &:last-child {
     margin-bottom: 0;
@@ -323,10 +323,6 @@
 // Responsive - Laptop 1440
 @include maxWidth($xl) {
   .project-item {
-    &:first-child {
-      margin-top: 16rem;
-    }
-
     &:nth-child(odd) {
       .project-item__image {
         &::after {
@@ -367,10 +363,6 @@
     grid-template-columns: 1fr;
     gap: 0rem;
     margin: 5rem 0;
-
-    &:first-child {
-      margin-top: 12rem;
-    }
 
     &:nth-child(even) {
       direction: ltr;
