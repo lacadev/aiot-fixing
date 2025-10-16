@@ -393,7 +393,7 @@ function setupMenuMobile() {
     }
   });
 
-  // Tonggle languge
+  // Toggle languge
   globalBtn?.addEventListener('click', (e) => {
     if (window.innerWidth < 769) {
       e.stopPropagation();
@@ -433,7 +433,7 @@ function setupMenuMobile() {
     });
   });
 
-  // Handle sub-menu open
+  // Handle mobile-menu add sub-menu open
   menuItems.forEach((item) => {
     const submenu = item.querySelector('.sub-menu');
     const link = item.querySelector('a');
@@ -442,11 +442,25 @@ function setupMenuMobile() {
 
     item.classList.add('has-submenu');
 
-    link.addEventListener('click', e => {
+    link.addEventListener('click', (e) => {
       e.preventDefault();
-      const open = item.classList.toggle('open');
-      submenu.style.maxHeight = open ? submenu.scrollHeight + 'px' : 0;
-      submenu.style.opacity = open ? '1' : '0';
+
+      const isOpen = item.classList.contains('open');
+
+      menuItems.forEach((i) => {
+        if (i !== item) {
+          i.classList.remove('open');
+          const sub = i.querySelector('.sub-menu');
+          if (sub) {
+            sub.style.maxHeight = 0;
+            sub.style.opacity = 0;
+          }
+        }
+      });
+
+      item.classList.toggle('open', !isOpen);
+      submenu.style.maxHeight = !isOpen ? submenu.scrollHeight + 'px' : 0;
+      submenu.style.opacity = !isOpen ? '1' : '0';
     });
   });
 
@@ -545,48 +559,6 @@ function setupProjectFilter() {
   }
 
   filterProjects();
-
-  // Hide header when scroll and display when stop
-  let scrollTimer;
-  window.addEventListener("scroll", () => {
-    hideHeader();
-
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      showHeader();
-    }, 400);
-  });
-
-  // Open list menu
-
-  function openModal() {
-    modal.classList.add('active');
-    listMenuToggleBtn.classList.add('active');
-  }
-
-  function closeModal() {
-    modal.classList.add('closing');
-    listMenuToggleBtn.classList.remove('active');
-
-    setTimeout(() => {
-      modal.classList.remove('active', 'closing');
-    }, 400);
-  }
-
-  listMenuToggleBtn?.addEventListener('click', () => {
-    if (!modal.classList.contains('active')) {
-      openModal();
-    } else {
-      closeModal();
-    }
-  });
-
-  overlay?.addEventListener('click', () => {
-    if (modal.classList.contains('active')) {
-      closeModal();
-    }
-  });
-
 }
 
 function alertDropdownSubMenu() {

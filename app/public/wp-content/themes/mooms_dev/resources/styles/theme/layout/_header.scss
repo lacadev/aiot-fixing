@@ -767,10 +767,6 @@ header {
                     img {
                         width: 1.5rem;
                     }
-
-                    &:hover {
-                        color: $primaryColor;
-                    }
                 }
             }
         }
@@ -871,7 +867,7 @@ header {
 
         .mobile-menu__content {
             flex: 1;
-            max-height: calc(100vh - 20rem);
+            max-height: calc(100vh - 22rem);
             overflow-y: auto;
         }
 
