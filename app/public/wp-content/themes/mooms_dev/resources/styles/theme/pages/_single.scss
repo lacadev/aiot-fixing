@@ -229,6 +229,14 @@ h1.page-title {
     flex: 1 1 80%;
     border-left: 2px solid rgba(0, 0, 0, 0.1);
 
+    .full-width {
+      max-width: 100%;
+      left: 0;
+      right: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
     @include maxWidth($lg) {
       max-width: 75%;
       flex: 1 1 75%;
