@@ -1,0 +1,24 @@
+@use "../utilities/variables.scss" as *;
+@use "../utilities/mixin.scss" as *;
+
+.policy-scroll {
+    max-height: 40rem;
+    overflow-y: auto;
+    margin: 6rem 0;
+    padding: 1rem;
+
+    ul {
+        text-align: left;
+        padding-top: 1rem;
+
+        li {
+            padding: 1rem 0;
+            line-height: 2rem;
+
+        }
+    }
+}
+
+.form-row.submit-btn {
+    margin-top: 0;
+}
