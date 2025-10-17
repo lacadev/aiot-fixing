@@ -314,6 +314,10 @@ header {
                     &:hover {
                         color: $primaryColor;
                     }
+
+                    &[hreflang="vi"] {
+                        display: none;
+                    }
                 }
             }
         }
