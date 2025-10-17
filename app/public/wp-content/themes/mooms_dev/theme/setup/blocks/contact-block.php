@@ -2,7 +2,7 @@
 use Carbon_Fields\Block;
 use Carbon_Fields\Field;
 
-Block::make(__('Block Contact', 'gaumap')) 
+Block::make(__('Block Contact', 'gaumap'))
 ->add_fields([
     Field::make('separator', 'contact_spt', __('BLOCK CONTACT', 'gaumap'))->set_width(70),
     Field::make('html', 'contact_guide') ->set_width(30)
@@ -36,8 +36,6 @@ Block::make(__('Block Contact', 'gaumap'))
         Field::make( 'text', 'url', __('','gaumap'))
         ->set_attribute('placeholder', 'Enter contact url'),
     ])->set_header_template('<% if (name) { %><%- name %><% } %>'),
-    
-    
 ])
 ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
     $title = !empty($fields['contact_title']) ? esc_html($fields['contact_title']) : '';
@@ -50,13 +48,12 @@ Block::make(__('Block Contact', 'gaumap'))
             <?= $googMap; ?>
         </div>
         <div class="info-contact">
-            
             <?php
             if ($title):
                 echo '<h2 class="block-title">' . $title . '</h2>';
             endif;
-            
-            if ($desc): 
+
+            if ($desc):
                 echo '<div class="block-desc">' .  apply_filters('the_content', $desc) . '</div>';
             endif;
 
@@ -120,7 +117,7 @@ Block::make(__('Block Contact', 'gaumap'))
 						<br>
 						連絡先：03-4500-6968
 					  </li>
-					  <li><b>4．個人情報の第三者提供</b><br>
+					  <li><b>3．個人情報の第三者提供</b><br>
 						当社は、ご提供いただいた個人情報を次の場合を除き第三者に提供いたしません。
 						  <br>
 						  ・ご本人の同意がある場合
@@ -133,10 +130,10 @@ Block::make(__('Block Contact', 'gaumap'))
 						  <br>
 						  ・国の機関若しくは地方公共団体又はその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることによって当該事務の遂行に支障を及ぼすおそれがあるとき
 					  </li>
-					  <li><b>5．個人情報取扱いの委託</b><br>
+					  <li><b>4．個人情報取扱いの委託</b><br>
 						当社は、事業運営上業務の一部を外部に委託しており、業務委託先に対しては、個人情報を預けることがあります。この場合、個人情報を適切に取り扱っていると認められる委託先を選定し、契約等において個人情報の適正管理・機密保持などによりお客様の個人情報の漏洩防止に必要な事項を取決め、適切な管理を実施させます。
 					  </li>
-					  <li><b>6．個人情報の開示等の請求</b><br>
+					  <li><b>5．個人情報の開示等の請求</b><br>
 						お客様が当社に対してご自身の個人情報の開示等（利用目的の通知、開示、内容の訂正・追加・削除、利用の停止または消去、第三者への提供の停止、第三者提供記録の開示）に関して、当社「個人情報に関するお問合わせ窓口」に申し出ることができます。その際、当社はご本人を確認させていただいたうえで、合理的な期間内に対応いたします。開示等の申し出の詳細につきましては、下記の「個人情報に関するお問い合わせ窓口」までお問い合わせください。
 						  <br>
 						  <br>
@@ -147,18 +144,18 @@ Block::make(__('Block Contact', 'gaumap'))
 　　　　　　　　		  <br>
 						  メールアドレス：info@aiot-global.com
 　　　　　　　　		  <br>
-						  TEL：03-4500-6968 
+						  TEL：03-4500-6968
 						  <br>
 						  <br>
 					  </li>
-					  <li><b>7．個人情報を提供されることの任意性について</b><br>
+					  <li><b>6．個人情報を提供されることの任意性について</b><br>
 						お客様が当社に個人情報を提供されるかどうかは、お客様の任意によるものです。ただし、必要な項目をいただけない場合、各サービス等が適切な状態で提供できない場合があります。
 					  </li>
-					  <li><b>8．本Webサイトへアクセスしたことを契機として機械的に取得される情報</b><br>
+					  <li><b>7．本Webサイトへアクセスしたことを契機として機械的に取得される情報</b><br>
 						当社は、閲覧されたWebサイトのセキュリティ確保・ユーザーサービス向上のため、Cookieにより閲覧された方の情報を取得することがあります。
 					  </li>
 					</ul>
-					<div style="text-align: right;">
+					<div style="text-align: right; padding: 2rem 1rem;">
 						以上
 					</div>
 				  </div>
@@ -166,7 +163,7 @@ Block::make(__('Block Contact', 'gaumap'))
                     <div style="margin-left: 1.5rem;">
 						<span>
 							<input style="height: 2rem; width: 2rem;" type="checkbox" id="agree" name="agree" required>
-							<span for="agree">「個人情報の取り扱い」に同意する</span>							
+							<span for="agree">「個人情報の取り扱い」に同意する</span>
 						</span>
                         <div class="underline"></div>
                         <br />
@@ -212,7 +209,6 @@ Block::make(__('Block Contact', 'gaumap'))
                         <div class="icon-address"></div>
                         <?= esc_html(getOption('address'));?>
                     </div>
-                    
             </div>
         </div>
     </section>
