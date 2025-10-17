@@ -529,7 +529,7 @@ function setupProjectFilter() {
     projects.forEach((project) => {
       const dataValues =
         project
-          .getAttribute('data-value')
+          .getAttribute("data-value")
           ?.split(/\s+/)
           .map((v) => v.trim()) || [];
 
@@ -538,19 +538,29 @@ function setupProjectFilter() {
         selectedValues.some((value) => dataValues.includes(value));
 
       if (match) {
-        project.classList.remove('is-hidden');
+        project.classList.remove("is-hidden");
         visibleCount++;
       } else {
-        project.classList.add('is-hidden');
+        project.classList.add("is-hidden");
       }
     });
 
-    if (visibleCount === 0) {
-      noProjectNotice.style.display = 'block';
-    } else {
-      noProjectNotice.style.display = 'none';
-    }
+    updateProjectLayout();
+
+    noProjectNotice.style.display = visibleCount === 0 ? "block" : "none";
   }
+
+  function updateProjectLayout() {
+    const visibleProjects = Array.from(
+      document.querySelectorAll(".project-item:not(.is-hidden)")
+    );
+
+    visibleProjects.forEach((proj, index) => {
+      proj.classList.remove("is-even", "is-odd");
+      proj.classList.add(index % 2 === 0 ? "is-odd" : "is-even");
+    });
+  }
+  
 
   if (window.jQuery && jQuery.fn.select2) {
     jQuery(selectBox).on('change.select2', filterProjects);

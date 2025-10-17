@@ -112,6 +112,11 @@
     }
   }
 }
+// List project
+.list-project {
+  margin-top: 12rem;
+  padding-bottom: 12rem;
+}
 
 // Project item
 .project-item {
@@ -123,16 +128,7 @@
   padding: 0;
   color: $textColor;
 
-  &:first-child {
-    margin-top: 19rem;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-    padding-bottom: 15rem;
-  }
-
-  &:nth-child(even) {
+  &.is-even {
     direction: rtl;
     text-align: right;
 
@@ -141,6 +137,11 @@
       direction: ltr;
       text-align: left;
     }
+  }
+
+  &.is-odd {
+    direction: ltr;
+    text-align: left;
   }
 
   &__tags {
@@ -277,7 +278,7 @@
     }
   }
 
-  &:nth-child(odd) {
+  &.is-odd {
     .project-item__image {
       &::after {
         left: 100%;
@@ -286,7 +287,7 @@
     }
   }
 
-  &:nth-child(even) {
+  &.is-even {
     .project-item__image {
       &::before {
         right: 100%;
@@ -298,12 +299,12 @@
 
 // Image place
 .project-item {
-  &:nth-child(odd) .project-item__image {
+  &.is-odd .project-item__image {
     justify-content: flex-end;
     padding-right: 0;
   }
 
-  &:nth-child(even) .project-item__image {
+  &.is-even .project-item__image {
     justify-content: flex-start;
     padding-left: 0;
   }
@@ -323,11 +324,7 @@
 // Responsive - Laptop 1440
 @include maxWidth($xl) {
   .project-item {
-    &:first-child {
-      margin-top: 16rem;
-    }
-
-    &:nth-child(odd) {
+    &.is-odd {
       .project-item__image {
         &::after {
           left: 100%;
@@ -336,7 +333,7 @@
       }
     }
 
-    &:nth-child(even) {
+    &.is-even {
       .project-item__image {
         &::before {
           right: 100%;
@@ -363,23 +360,20 @@
     margin: 0.55rem 0.1rem 0 0.5rem;
   }
 
+  .list-project {
+    padding-bottom: 2rem;
+  }
+
   .project-item {
     grid-template-columns: 1fr;
     gap: 0rem;
     margin: 5rem 0;
 
-    &:first-child {
-      margin-top: 12rem;
-    }
-
-    &:nth-child(even) {
+    &.is-even {
       direction: ltr;
       text-align: left;
     }
 
-    &:last-child {
-      padding-bottom: 2rem;
-    }
     &__title {
       padding: 2rem 0;
     }
@@ -396,8 +390,8 @@
       }
 
       &,
-      .project-item:nth-child(odd) &,
-      .project-item:nth-child(even) & {
+      .project-item.is-odd &,
+      .project-item.is-even & {
         &::before,
         &::after {
           width: calc((100vw - 100%) / 2);
