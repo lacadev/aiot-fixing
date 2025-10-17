@@ -126,6 +126,7 @@ footer {
             line-height: 1.35;
             letter-spacing: 0.16em;
             text-decoration-line: underline;
+            text-underline-offset: 1rem;
             color: #fff;
             transform: translate(-50%, -50%);
             opacity: 0;
@@ -187,7 +188,7 @@ footer {
                 padding: 1rem 0;
                 height: auto;
                 width: 100%;
-                max-width: 18rem;
+                max-width: 17rem;
                 object-fit: contain;
 
                 @include maxWidth($md) {
