@@ -470,6 +470,7 @@ function setupMenuMobile() {
     if (!isActive) {
       modal.classList.add('active');
       listMenuToggleBtn.classList.add('active');
+      document.body.classList.add('no-scroll');
     } else {
       closeModal();
     }
@@ -483,6 +484,7 @@ function setupMenuMobile() {
 
     setTimeout(() => {
       modal.classList.remove('active', 'closing');
+      document.body.classList.remove('no-scroll');
     }, 400);
   }
 }
@@ -560,7 +562,6 @@ function setupProjectFilter() {
       proj.classList.add(index % 2 === 0 ? "is-odd" : "is-even");
     });
   }
-  
 
   if (window.jQuery && jQuery.fn.select2) {
     jQuery(selectBox).on('change.select2', filterProjects);
