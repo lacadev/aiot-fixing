@@ -10,6 +10,7 @@ footer {
         text-align: center;
         border-top: 5px solid $primaryColor;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
         @include maxWidth($md) {
             padding: 8rem 0 4rem;
         }
@@ -43,6 +44,9 @@ footer {
 
             @include maxWidth($md) {
                 padding: 1rem;
+                left: auto;
+                right: -2rem;
+
                 .svg {
                     height: 2rem;
                     width: 2rem;
@@ -51,7 +55,7 @@ footer {
 
             &.fixed {
                 position: fixed;
-                top: 90%;
+                top: 87%;
             }
 
             &.hidden {
@@ -557,5 +561,7 @@ footer {
         @include maxWidth($md) {
             padding: 2.5rem 0 8.5rem 0;
         }
+
+        @include resFont(1.2, 1.6);
     }
 }

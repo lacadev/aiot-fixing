@@ -747,6 +747,10 @@ header {
                     display: none;
                 }
 
+                &:last-child {
+                    margin-right: 1px;
+                }
+
                 a {
                     display: flex;
                     flex-direction: column;
@@ -759,14 +763,30 @@ header {
                     text-decoration: none;
                     color: $textColor;
                     font-size: 1rem;
-                    font-weight: $semiBold;
-
-                    svg {
-                        font-size: 2rem;
-                    }
+                    font-weight: $medium;
 
                     img {
                         width: 1.5rem;
+                    }
+                }
+
+                &.current-menu-item {
+                    position: relative;
+
+                    a {
+                        font-weight: $bold;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        bottom: 2px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 100%;
+                        height: 3px;
+                        background-color: $primaryColor;
+                        border-radius: 10px;
                     }
                 }
             }
