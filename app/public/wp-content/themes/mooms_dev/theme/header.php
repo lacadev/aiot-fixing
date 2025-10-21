@@ -162,7 +162,7 @@
 			<div class="mobile-header__menu-dropdown">
 				<button type="button" class="mobile-header__menu-toggle">
 					<span class="iconify" data-icon="mdi:menu"></span>
-					<a class="menu-toggle__label">Menu</a>
+					<a class="menu-toggle__label"><?php _e('Menu','mms');?></a>
 				</button>
 			</div>
 		</div>
@@ -200,7 +200,7 @@
 			<div class="mobile-menu__close">
 				<button class="button-close">
 					<span class="button-close__icon"></span>
-  					<span class="button-close__label">Close</span>
+  					<span class="button-close__label"><?php _e('Close','mms');?></span>
 				</button>
 			</div>
 		</div>
