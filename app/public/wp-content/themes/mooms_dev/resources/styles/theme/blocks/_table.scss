@@ -1,0 +1,41 @@
+@use "../utilities/variables.scss" as *;
+@use "../utilities/mixin.scss" as *;
+
+//Table
+.list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+
+  //Line
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 1rem;
+    align-items: center;
+    justify-content: start;
+    color: $textColor;
+    background-color: var(--bg-color, #fff);
+    padding: 1.5rem;
+
+    @include resFont(1.4, 1.8);
+
+    &__title {
+      min-width: 8rem;
+      margin-bottom: 0;
+    }
+
+    &__desc {
+      list-style: none;
+
+      li {
+        margin-top: 1rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
