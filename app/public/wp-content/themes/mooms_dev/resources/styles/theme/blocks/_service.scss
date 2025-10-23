@@ -2,7 +2,7 @@
 @use "../utilities/mixin.scss" as *;
 
 .block-service {
-    --gap: 3rem;
+    --gap: -1rem;
 
     &.reversed {
         .inner {
@@ -32,9 +32,11 @@
             gap: 2rem;
         }
         .name {
-            font-size: clamp(1.8rem, 2.5vw, 3rem);
+            padding: 2rem 0;
             font-weight: 700;
-            line-height: 2.2;
+            line-height: 1.4;
+
+            @include resFont(1.8, 3);
         }
         .desc {
             line-height: 1.8;
@@ -51,6 +53,7 @@
         .services-list {
             max-width: 100%;
             flex: 1 1 100%;
+            margin-bottom: 3rem;
         }
     }
 }
