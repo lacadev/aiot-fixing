@@ -17,18 +17,18 @@ $optionsPage = Container::make('theme_options', __('MMS Theme', 'mms'))
 	->set_page_file('app-theme-options.php')
 	->set_page_menu_position(3)
 	->add_tab(__('Branding | Thương hiệu', 'mms'), [
-		Field::make('color', 'primary_color', __('Primary Color', 'mms'))
+		Field::make('color', 'primary_color' . currentLanguage(), __('Primary Color', 'mms'))
 		->set_width(50)
-		->set_default_value('#010101'),
-		Field::make('color', 'secondary_color', __('Secondary Color', 'mms'))
+		->set_default_value('#d85040'),
+		Field::make('color', 'secondary_color' . currentLanguage(), __('Secondary Color', 'mms'))
 		->set_width(50)
-		->set_default_value('#626262'),
+		->set_default_value('#5384ed'),
 		
-		Field::make('image', 'logo', __('Logo', 'mms'))
+		Field::make('image', 'logo' . currentLanguage(), __('Logo', 'mms'))
 			->set_width(33.33),
-		Field::make('image', 'footer_logo', __('Footer Logo', 'mms'))
+		Field::make('image', 'footer_logo' . currentLanguage(), __('Footer Logo', 'mms'))
 			->set_width(33.33),
-		Field::make('image', 'hinh_anh_mac_dinh', __('Default image | Hình ảnh mặc định', 'mms'))
+		Field::make('image', 'hinh_anh_mac_dinh' . currentLanguage(), __('Default image | Hình ảnh mặc định', 'mms'))
 			->set_width(33.33),
 	])
 

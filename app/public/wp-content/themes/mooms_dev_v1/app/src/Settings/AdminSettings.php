@@ -362,7 +362,7 @@ class AdminSettings
 							icon: 'success',
 							title: '<?php echo esc_js(sprintf(__('Xin chào %s', 'mms'), $current_user->display_name ?: $current_user->user_login)); ?>',
 							showConfirmButton: false,
-							timer: 4000
+							timer: 1500
 						});
 					} else {
 						setTimeout(checkSwal, 100);

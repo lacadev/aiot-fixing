@@ -77,16 +77,16 @@ class CustomDashboard
                         <div class="item"><?php echo esc_html($stats['blogs_scheduled']) . ' - ' . __('Scheduled', 'mms'); ?></div>
                     </div>
                 </div>
-                <!-- Services -->
+                <!-- projects -->
                 <div class="stat-item">
-                    <div class="stat-number"><?php echo esc_html($stats['services']) . ' ' . __('service posts', 'mms'); ?></div>
+                    <div class="stat-number"><?php echo esc_html($stats['projects']) . ' ' . __('project posts', 'mms'); ?></div>
                     <div class="stat-list">
-                        <div class="item"><?php echo esc_html($stats['services_public']) . ' - ' . __('Public', 'mms'); ?></div>
-                        <div class="item"><?php echo esc_html($stats['services_pending']) . ' - ' . __('Pending', 'mms'); ?></div>
-                        <div class="item"><?php echo esc_html($stats['services_trash']) . ' - ' . __('Trash', 'mms'); ?></div>
-                        <div class="item"><?php echo esc_html($stats['services_draft']) . ' - ' . __('Draft', 'mms'); ?></div>
-                        <div class="item"><?php echo esc_html($stats['services_private']) . ' - ' . __('Private', 'mms'); ?></div>
-                        <div class="item"><?php echo esc_html($stats['services_scheduled']) . ' - ' . __('Scheduled', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_public']) . ' - ' . __('Public', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_pending']) . ' - ' . __('Pending', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_trash']) . ' - ' . __('Trash', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_draft']) . ' - ' . __('Draft', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_private']) . ' - ' . __('Private', 'mms'); ?></div>
+                        <div class="item"><?php echo esc_html($stats['projects_scheduled']) . ' - ' . __('Scheduled', 'mms'); ?></div>
                     </div>
                 </div>
                 <!-- Pages -->
@@ -132,8 +132,8 @@ class CustomDashboard
                 <a href="<?php echo admin_url('edit.php'); ?>" class="button button-primary">
                     <?php _e('Blogs', 'mms'); ?>
                 </a>
-                <a href="<?php echo admin_url('edit.php?post_type=service'); ?>" class="button button-primary">
-                    <?php _e('Services', 'mms'); ?>
+                <a href="<?php echo admin_url('edit.php?post_type=project'); ?>" class="button button-primary">
+                    <?php _e('projects', 'mms'); ?>
                 </a>
                 <a href="<?php echo admin_url('edit.php?post_type=page'); ?>" class="button">
                     <?php _e('Pages', 'mms'); ?>
@@ -154,10 +154,10 @@ class CustomDashboard
         ?>
         <div class="mms-quick-actions">
             <div class="actions-grid">
-                <a href="<?php echo admin_url('post-new.php'); ?>" class="action-item">
+                <!-- <a href="<?php //echo admin_url('post-new.php'); ?>" class="action-item">
                     <span class="dashicons dashicons-edit"></span>
-                    <span><?php _e('New Post', 'mms'); ?></span>
-                </a>
+                    <span><?php //_e('New Post', 'mms'); ?></span>
+                </a> -->
                 <a href="<?php echo admin_url('post-new.php?post_type=page'); ?>" class="action-item">
                     <span class="dashicons dashicons-admin-page"></span>
                     <span><?php _e('New Page', 'mms'); ?></span>
@@ -232,7 +232,7 @@ class CustomDashboard
     {
         // Safely obtain post counts for custom types
         $blogCounts = wp_count_posts('blog');
-        $serviceCounts = wp_count_posts('service');
+        $projectCounts = wp_count_posts('project');
         $pageCounts = wp_count_posts('page');
 
         // Helper to get a numeric count or 0 if undefined
@@ -242,7 +242,7 @@ class CustomDashboard
 
         // Total = sum of all numeric properties returned by wp_count_posts
         $blogsTotal = array_sum(array_map('intval', (array) $blogCounts));
-        $servicesTotal = array_sum(array_map('intval', (array) $serviceCounts));
+        $projectsTotal = array_sum(array_map('intval', (array) $projectCounts));
         // Tính tổng Page theo các trạng thái đang hiển thị để tránh lệch (auto-draft/private không tính)
         $pagesTotal = (
             $safe($pageCounts, 'publish')
@@ -266,14 +266,14 @@ class CustomDashboard
             'blogs_private' => $safe($blogCounts, 'private'),
             'blogs_scheduled' => $safe($blogCounts, 'future'),
 
-            // Services
-            'services' => $servicesTotal,
-            'services_public' => $safe($serviceCounts, 'publish'),
-            'services_pending' => $safe($serviceCounts, 'pending'),
-            'services_trash' => $safe($serviceCounts, 'trash'),
-            'services_draft' => $safe($serviceCounts, 'draft'),
-            'services_private' => $safe($serviceCounts, 'private'),
-            'services_scheduled' => $safe($serviceCounts, 'future'),
+            // projects
+            'projects' => $projectsTotal,
+            'projects_public' => $safe($projectCounts, 'publish'),
+            'projects_pending' => $safe($projectCounts, 'pending'),
+            'projects_trash' => $safe($projectCounts, 'trash'),
+            'projects_draft' => $safe($projectCounts, 'draft'),
+            'projects_private' => $safe($projectCounts, 'private'),
+            'projects_scheduled' => $safe($projectCounts, 'future'),
 
             // Count all attachments (media library items)
             'media' => (function () {

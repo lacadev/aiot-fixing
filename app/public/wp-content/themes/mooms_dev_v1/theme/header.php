@@ -24,13 +24,6 @@
 			--primary-color: <?php echo getOption('primary_color') ?: '#d85040'; ?>;
 			--secondary-color: <?php echo getOption('secondary_color') ?: '#5384ed'; ?>;
 		}
-		
-		html[data-theme="dark"] {
-			--primary-color: #fff;
-			--primary-color-dark: <?php echo getOption('primary_color') ?: '#010101'; ?>;
-			--secondary-color: #fff;
-			--secondary-color-dark: <?php echo getOption('secondary_color') ?: '#626262'; ?>;
-		}
 	</style>
 
 	<link rel="apple-touch-icon" sizes="57x57" href="<?php theAsset('favicon/apple-icon-57x57.png'); ?>">
@@ -83,11 +76,12 @@
 	?>
 
 	<div class="wrapper_mm" id="swup">
+		
 		<header id="header" class="header">
 			<div class="inner-header">
 				<div id="logo" class="logo">
 					<a href="<?php bloginfo('url');?>" title="<?php bloginfo('name');?>">
-						<img src="<?php theOptionImage('logo');?>" width="170" height="75" alt="<?php bloginfo('name');?>">
+						<img src="<?php theOptionImage('logo');?>" alt="<?php bloginfo('name');?>">
 					</a>
 				</div>
 				<div class="content-menu">
