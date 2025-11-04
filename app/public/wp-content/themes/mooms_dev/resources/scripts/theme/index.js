@@ -13,13 +13,12 @@ import $ from "jquery";
 import "select2";
 
 jQuery(document).ready(function () {
-  // const swup = new Swup();
+  const swup = new Swup();
   initializePageFeatures();
 
-  // swup.hooks.on('content:replace', () => {
-  //   initializePageFeatures();
-  // });
-
+  swup.hooks.on('content:replace', () => {
+    initializePageFeatures();
+  });
 });
 
 function initializePageFeatures() {
