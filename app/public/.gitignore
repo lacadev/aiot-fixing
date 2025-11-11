@@ -6,6 +6,8 @@
 /wp-content/languages/
 /wp-content/wflogs/
 /wp-content/debug.log
+wp-content/mu-plugins/
+wp-content/uploads-local/
 
 wp-config.php
 wp-config-sample.php
