@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 // =============================================================================
 
 define('ALLOW_UNFILTERED_UPLOADS', true);
-define('SUPER_USER', ['mooms.dev', 'aiot']);
+define('SUPER_USER', ['aiot.anhd', 'aiot']);
 
 // =============================================================================
 // THEME INFORMATION

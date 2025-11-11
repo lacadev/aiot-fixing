@@ -304,7 +304,7 @@ function getListAllPages()
     $pages = get_posts([
         'post_type' => 'page',
         'posts_per_page' => -1,
-        'lang' => get_icl_language_code(),
+        'lang' => currentLanguage(),
     ]);
 
     $list = [];
@@ -314,43 +314,6 @@ function getListAllPages()
 
     return $list;
 }
-
-// get list child pages
-function getListChildPages()
-{
-    $post_id = isset($_GET['post']) ? absint($_GET['post']) : 0;
-    if (!$post_id && isset($_POST['post_ID'])) {
-        $post_id = absint($_POST['post_ID']);
-    }
-
-    if (!$post_id) {
-        return [];
-    }
-
-    $args = [
-        'post_type' => 'page',
-        'post_status' => 'publish',
-        'parent' => $post_id, // direct children of current page
-        'sort_column' => 'menu_order,post_title',
-        'sort_order' => 'ASC',
-    ];
-
-    // Filter by current language if multilanguage is active
-    if (function_exists('pll_current_language')) {
-        $args['lang'] = pll_current_language('slug');
-    } elseif (defined('ICL_LANGUAGE_CODE')) {
-        $args['lang'] = ICL_LANGUAGE_CODE;
-    }
-
-    $children = get_pages($args);
-
-    $options = [];
-    foreach ($children as $child) {
-        $options[$child->ID] = $child->post_title;
-    }
-    return $options;
-}
-
 // =============================================================================
 // TIME & DATE FORMATTING
 // =============================================================================

@@ -21,11 +21,13 @@ $home_url = pll_home_url();
 				</a>
 			</div>
 		</div>
+		
 		<!-- Back to top button -->
 		<a id="back-to-top">
 			<div class="svg"></div>
 		</a>
 	</div>
+
 	<div class="footer-main">
 		<div class="mm-container">
 			<div class="inner">

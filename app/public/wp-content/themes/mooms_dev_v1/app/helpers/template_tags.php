@@ -12,7 +12,7 @@ function getImageAsset($path) {
     $theme_path = str_replace('wp-content/themes/'. $theme_name .'/theme', 'wp-content/themes/' . $theme_name . '/', $my_theme->get_template_directory_uri());
 
     if (carbon_get_theme_option('use_short_url') !== true) {
-        $siteUrl = $theme_path . "/resources/images/";
+        $siteUrl = $theme_path . "resources/images/";
     } else {
         $siteUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . "/img/";
     }

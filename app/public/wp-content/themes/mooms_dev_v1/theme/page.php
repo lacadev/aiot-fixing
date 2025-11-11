@@ -14,7 +14,7 @@ $parentPage = get_post($post->post_parent);
 $parentTitle = get_the_title($parentPage->ID);
 $parentLink = get_the_permalink($parentPage->ID);
 ?>
-<div class="page" data-aos="fade-in" data-aos-duration="2000">
+<div class="main-content" data-aos="fade-in" data-aos-duration="2000">
 	<?php
 	if (!is_front_page() && is_page()):
 		if ($post->post_parent):
@@ -38,70 +38,28 @@ $parentLink = get_the_permalink($parentPage->ID);
 				</div>
 
 				<div class="body-child-page">
-					<!-- <button><?php // echo $parentTitle . ' ' . __('list','gaumap'); ?></button> -->
 					<aside class="page-sidebar">
 						<div class="parent-page">
-							<?= '<a href="' . $parentLink . '" class="parent-link">' . $parentTitle . '</a>';
-							?>
+							<?php echo '<a href="' . $parentLink . '" class="parent-link">' . $parentTitle . '</a>'; ?>
 						</div>
+
 						<div class="children-page">
-							<!-- list children page and actived current page -->
 							<ul>
 								<?php
-							// Build desired order from parent page meta (support both association and complex formats)
-							$desiredOrderIds = [];
-							if (function_exists('carbon_get_post_meta')) {
-								$rows = carbon_get_post_meta($post->post_parent, 'child_pages_order');
-								if (is_array($rows)) {
-									foreach ($rows as $row) {
-										if (is_array($row) && !empty($row['child_page'])) {
-											$desiredOrderIds[] = (int) $row['child_page'];
-										} elseif (is_array($row) && !empty($row['id'])) { // association format
-											$desiredOrderIds[] = (int) $row['id'];
-										} elseif (is_numeric($row)) { // legacy scalar
-											$desiredOrderIds[] = (int) $row;
-										}
-									}
-									$desiredOrderIds = array_values(array_unique(array_filter($desiredOrderIds)));
-								}
-							}
+									$parent_page_id = $post->post_parent ? $post->post_parent : get_the_ID();
 
-							$queryArgs = [
-								'post_type'      => 'page',
-								'posts_per_page' => -1,
-								'post_parent'    => $post->post_parent,
-							];
+									$children = wp_list_pages([
+										'title_li' => '',
+										'child_of' => $parent_page_id,
+										'echo' => 0
+									]);
 
-							// Ensure language matches current one (Polylang/WPML)
-							if (function_exists('pll_current_language')) {
-								$queryArgs['lang'] = pll_current_language('slug');
-							} elseif (defined('ICL_LANGUAGE_CODE')) {
-								$queryArgs['lang'] = ICL_LANGUAGE_CODE;
-							}
-
-							if (!empty($desiredOrderIds)) {
-								$queryArgs['post__in'] = $desiredOrderIds;
-								$queryArgs['orderby'] = 'post__in';
-							} else {
-								$queryArgs['orderby'] = 'date';
-								$queryArgs['order'] = 'DESC';
-							}
-
-							$q = new WP_Query($queryArgs);
-							// Lưu ID của page hiện tại trước khi vào loop (vì the_post() sẽ thay đổi global $post)
-							$current_viewing_page_id = get_queried_object_id();
-							if ($q->have_posts()):
-								while ($q->have_posts()): $q->the_post();
-									$loop_page_id = get_the_ID(); // ID của page trong loop
-									$active = ($loop_page_id === $current_viewing_page_id) ? ' class="active"' : '';
-									echo '<li' . $active . '><a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a></li>';
-								endwhile;
-								wp_reset_postdata();
-							endif;
-							?>
+									echo $children;
+								?>
 							</ul>
 						</div>
 					</aside>
+
 					<div class="page-content">
 						<?php the_content(); ?>
 					</div>
@@ -156,9 +114,10 @@ $parentLink = get_the_permalink($parentPage->ID);
 				$ordered_child_ids = [];
 				if (!empty($selected) && is_array($selected)) {
 					foreach ($selected as $item) {
-						if (isset($item['id'])) {
-							$ordered_child_ids[] = (int) $item['id'];
+						if (empty($item['child_page'])) {
+							continue; // Ignore rows without a selected child page.
 						}
+						$ordered_child_ids[] = (int) $item['child_page'];
 					}
 				}
 

@@ -2,8 +2,9 @@
 @use "../utilities/mixin.scss" as *;
 
 footer {
-    padding: 5rem 0 0;
+    padding: 0;
     background-color: #f4f4f4;
+
     .footer-top {
         padding: 5rem 0;
         position: relative;

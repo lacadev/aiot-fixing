@@ -9,7 +9,6 @@ header {
 
     &.fixed {
         position: fixed;
-        padding: clamp(1rem, 2.5vw, 0rem) 0;
         background-color: #fff;
         box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
 
