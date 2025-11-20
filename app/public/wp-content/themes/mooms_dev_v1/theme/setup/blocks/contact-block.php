@@ -5,72 +5,77 @@ use Carbon_Fields\Field;
 Block::make(__('Block Contact', 'gaumap'))
 ->add_fields([
     Field::make('separator', 'contact_spt', __('BLOCK CONTACT', 'gaumap'))->set_width(70),
-    Field::make('html', 'contact_guide') ->set_width(30)
-        ->set_html('<button class="contact-guide button">Hướng dẫn nhập</button>'),
+
     //Title
     Field::make('text', 'contact_title', __('', 'gaumap'))
-        ->set_attribute('placeholder', 'Enter block title')
-        ->set_attribute('data-step', '1')
-        ->set_attribute('data-intro', 'Nhập tiêu đề của block'),
+        ->set_attribute('placeholder', 'Enter block title'),
+        
     //Description
     Field::make('textarea', 'contact_desc', __('', 'gaumap'))
-        ->set_attribute('placeholder', 'Enter block description')
-        ->set_attribute('data-step', '2')
-        ->set_attribute('data-intro', 'Nhập mô tả của block'),
+        ->set_attribute('placeholder', 'Enter block description'),
+
     //Google map
     Field::make('textarea', 'google_map', __('', 'gaumap'))
-    ->set_attribute('placeholder', 'Iframe google map')
-    ->set_attribute('data-step', '3')
-    ->set_attribute('data-intro', 'Nhập iframe google map với width = 100%'),
+    ->set_attribute('placeholder', 'Iframe google map'),
+
+    //Policy
+    Field::make('rich_text', 'policy', __('', 'gaumap'))
+    ->set_attribute('placeholder', 'Enter policy'),
+
+    //Agree checkbox
+    Field::make('text', 'agree_text', __('', 'gaumap'))
+    ->set_attribute('placeholder', 'Enter agree text'),
+
     //Other contact methods
-    Field::make('text', 'contact_method_spt', __('', 'gaumap')) ->set_width(20)
-    ->set_default_value('Other contact methods')
-    ->set_attribute('readOnly', 'true')
-    ->set_attribute('data-step', '4')
-    ->set_attribute('data-intro', 'Nhập thông tin liên hệ khác'),
-    Field::make('complex', 'contact_method', __('', 'gaumap')) ->set_width(80)
-    ->set_layout('tabbed-horizontal')
-    ->add_fields([
-        Field::make( 'text', 'name', __('','gaumap'))
-        ->set_attribute('placeholder', 'Enter contact name'),
-        Field::make( 'text', 'url', __('','gaumap'))
-        ->set_attribute('placeholder', 'Enter contact url'),
-    ])->set_header_template('<% if (name) { %><%- name %><% } %>'),
+    // Field::make('text', 'contact_method_spt', __('', 'gaumap')) ->set_width(20)
+    // ->set_default_value('Other contact methods')
+    // ->set_attribute('readOnly', 'true'),
+
+    // Field::make('complex', 'contact_method', __('', 'gaumap')) ->set_width(80)
+    // ->set_layout('tabbed-horizontal')
+    // ->add_fields([
+    //     Field::make( 'text', 'name', __('','gaumap'))
+    //     ->set_attribute('placeholder', 'Enter contact name'),
+    //     Field::make( 'text', 'url', __('','gaumap'))
+    //     ->set_attribute('placeholder', 'Enter contact url'),
+    // ])->set_header_template('<% if (name) { %><%- name %><% } %>'),
 ])
 ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
     $title = !empty($fields['contact_title']) ? esc_html($fields['contact_title']) : '';
     $desc = !empty($fields['contact_desc']) ? wp_kses_post($fields['contact_desc']) : '';
     $googMap = !empty($fields['google_map']) ? $fields['google_map'] : '';
-    $otherContact = !empty($fields['contact_method']) ? $fields['contact_method'] : '';
+    // $otherContact = !empty($fields['contact_method']) ? $fields['contact_method'] : '';
+    $policy = !empty($fields['policy']) ? $fields['policy'] : '';
+    $agree_text = !empty($fields['agree_text']) ? esc_html($fields['agree_text']) : '';
 ?>
     <section class="block-contact">
         <div class="google-map">
-            <?= $googMap; ?>
+            <?php echo $googMap; ?>
         </div>
         <div class="info-contact">
             <?php
             if ($title):
-                echo '<h2 class="block-title">' . $title . '</h2>';
+                echo '<h2 class="block-title">' . esc_html($title) . '</h2>';
             endif;
 
             if ($desc):
-                echo '<div class="block-desc">' .  apply_filters('the_content', $desc) . '</div>';
+                echo '<div class="block-desc">' .  wp_kses_post(apply_filters('the_content', $desc)) . '</div>';
             endif;
 
-            if ($otherContact):
-                echo '<div class="other-contact">';
-                    foreach ($otherContact as $contact):
-                        $name = !empty($contact['name']) ? esc_html($contact['name']) : '';
-                        $url = !empty($contact['url']) ? esc_url($contact['url']) : '';
-                        if ($name && $url):
-                            echo '<a href="' . $url . '" target="_blank" class="contact-method">' . $name . '</a>';
-                        endif;
-                    endforeach;
-                echo '</div>';
-            endif;
+            // if ($otherContact):
+            //     echo '<div class="other-contact">';
+            //         foreach ($otherContact as $contact):
+            //             $name = !empty($contact['name']) ? esc_html($contact['name']) : '';
+            //             $url = !empty($contact['url']) ? esc_url($contact['url']) : '';
+            //             if ($name && $url):
+            //                 echo '<a href="' . $url . '" target="_blank" class="contact-method">' . $name . '</a>';
+            //             endif;
+            //         endforeach;
+            //     echo '</div>';
+            // endif;
             ?>
 
-            <form  id="contactForm" action="#">
+            <form id="contactForm" action="#">
                 <div class="form-row">
                     <div class="input-data">
                         <input type="text" name="first_name" required>
@@ -104,71 +109,20 @@ Block::make(__('Block Contact', 'gaumap'))
                         <br />
                     </div>
                 </div>
-				<div class="policy-scroll">
-					<h2><b>個人情報の取扱いについて</b></h2>
-					<br>
-					<h3>この入力フォームで取得する個人情報の取り扱いは下記3項の利用目的のためであり、この目的の範囲を超えて利用することはございません。</h3>
-					<ul>
-					  <li><b>１．組織の名称</b><br>
-						組織の名称：AIoT株式会社
-					  </li>
-					  <li><b>2．個人情報を関する管理者の氏名、所属及び連絡先</b><br>
-						管理者名：個人情報保護管理者　タン バ ニャト（info@aiot-global.com)
-						<br>
-						連絡先：03-4500-6968
-					  </li>
-					  <li><b>3．個人情報の第三者提供</b><br>
-						当社は、ご提供いただいた個人情報を次の場合を除き第三者に提供いたしません。
-						  <br>
-						  ・ご本人の同意がある場合
-						  <br>
-						  ・法令に基づく場合
-						  <br>
-						  ・人の生命、身体又は財産の保護のために必要がある場合であって、人の同意を得ることが困難であるとき
-						  <br>
-						  ・公衆衛生の向上又は児童の健全な育成の推進のために特に必要がある場合であって本人の、同意を得ることが困難であるとき
-						  <br>
-						  ・国の機関若しくは地方公共団体又はその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることによって当該事務の遂行に支障を及ぼすおそれがあるとき
-					  </li>
-					  <li><b>4．個人情報取扱いの委託</b><br>
-						当社は、事業運営上業務の一部を外部に委託しており、業務委託先に対しては、個人情報を預けることがあります。この場合、個人情報を適切に取り扱っていると認められる委託先を選定し、契約等において個人情報の適正管理・機密保持などによりお客様の個人情報の漏洩防止に必要な事項を取決め、適切な管理を実施させます。
-					  </li>
-					  <li><b>5．個人情報の開示等の請求</b><br>
-						お客様が当社に対してご自身の個人情報の開示等（利用目的の通知、開示、内容の訂正・追加・削除、利用の停止または消去、第三者への提供の停止、第三者提供記録の開示）に関して、当社「個人情報に関するお問合わせ窓口」に申し出ることができます。その際、当社はご本人を確認させていただいたうえで、合理的な期間内に対応いたします。開示等の申し出の詳細につきましては、下記の「個人情報に関するお問い合わせ窓口」までお問い合わせください。
-						  <br>
-						  <br>
-						  <br>
-						  〒104-0031 東京都中央区京橋１丁目１−５ セントラルビル 2階
-　　　　　　　　		  <br>
-						  AIoT株式会社　個人情報に関するお問い合わせ窓口
-　　　　　　　　		  <br>
-						  メールアドレス：info@aiot-global.com
-　　　　　　　　		  <br>
-						  TEL：03-4500-6968
-						  <br>
-						  <br>
-					  </li>
-					  <li><b>6．個人情報を提供されることの任意性について</b><br>
-						お客様が当社に個人情報を提供されるかどうかは、お客様の任意によるものです。ただし、必要な項目をいただけない場合、各サービス等が適切な状態で提供できない場合があります。
-					  </li>
-					  <li><b>7．本Webサイトへアクセスしたことを契機として機械的に取得される情報</b><br>
-						当社は、閲覧されたWebサイトのセキュリティ確保・ユーザーサービス向上のため、Cookieにより閲覧された方の情報を取得することがあります。
-					  </li>
-					</ul>
-					<div style="text-align: right; padding: 2rem 1rem;">
-						以上
-					</div>
-				  </div>
+
+                <?php
+                if ($policy):
+                    echo '<div class="policy-scroll">' . wp_kses_post(apply_filters('the_content', $policy)) . '</div>';
+                endif;
+                ?>
+
 				<div class="form-row">
-                    <div style="margin-left: 1.5rem;">
-						<span>
-							<input style="height: 2rem; width: 2rem;" type="checkbox" id="agree" name="agree" required>
-							<span for="agree">「個人情報の取り扱い」に同意する</span>
-						</span>
-                        <div class="underline"></div>
-                        <br />
-                    </div>
+                    <span>
+                        <input style="height: 2rem; width: 2rem;" type="checkbox" id="agree" name="agree" required>
+                        <span for="agree"><?php echo $agree_text;?></span>
+                    </span>
                 </div>
+
                 <div class="form-row submit-btn">
                     <div class="input-data">
                         <div class="inner">
@@ -186,29 +140,37 @@ Block::make(__('Block Contact', 'gaumap'))
                     </div>
                 </div>
             </form>
+
             <div id="formMessage"></div>
 
             <div class="info-company">
-                    <div class="info-item phone">
-                        <a href="tel:<?= str_replace(['.', ',','-', ' '], '', getOption('phone_number'));?>">
-                            <div class="icon-phone"></div>
-                            <?= esc_html(getOption('phone_number'));?>
-                        </a>
-                    </div>
-                    <div class="info-item email">
-                        <a href="mailto:<?= esc_html(getOption('email'));?>">
-                            <div class="icon-mail"></div>
-                            <?= esc_html(getOption('email'));?>
-                        </a>
-                    </div>
-                    <div class="info-item hour">
-                        <div class="icon-hour"></div>
-                        <?= esc_html(getOption('hour_working'));?>
-                    </div>
-                    <div class="info-item address">
-                        <div class="icon-address"></div>
-                        <?= esc_html(getOption('address'));?>
-                    </div>
+                <!-- Phone -->
+                <div class="info-item phone">
+                    <a href="tel:<?= str_replace(['.', ',','-', ' '], '', getOption('phone_number'));?>">
+                        <div class="icon-phone"></div>
+                        <?php echo esc_html(getOption('phone_number'));?>
+                    </a>
+                </div>
+
+                <!-- Email -->
+                <div class="info-item email">
+                    <a href="mailto:<?php echo esc_html(getOption('email'));?>">
+                        <div class="icon-mail"></div>
+                        <?php echo esc_html(getOption('email'));?>
+                    </a>
+                </div>
+
+                <!-- Hour -->
+                <div class="info-item hour">
+                    <div class="icon-hour"></div>
+                    <?php echo esc_html(getOption('hour_working'));?>
+                </div>
+
+                <!-- Address -->
+                <div class="info-item address">
+                    <div class="icon-address"></div>
+                    <?php echo esc_html(getOption('address'));?>
+                </div>
             </div>
         </div>
     </section>

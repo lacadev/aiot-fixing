@@ -74,13 +74,13 @@ Block::make(__('Block Intro', 'gaumap'))
     $title = !empty($fields['intro_title']) ? esc_html($fields['intro_title']) : '';
     $desc = !empty($fields['intro_desc']) ? wp_kses_post($fields['intro_desc']) : '';
     $url = !empty($fields['intro_page_url']) ? esc_url($fields['intro_page_url']) : '';
-    $reversed = !empty($fields['reversed']) ? 'reversed' : '';
+    $reversed = !empty($fields['reversed']) ? 'reversed ' : '';
     $mediaType = !empty($fields['type_media']) ? esc_html($fields['type_media']) : '';
     $image = !empty($fields['image']) ? esc_url(getImageUrlById($fields['image'])) : '';
     $video = !empty($fields['video']) ? esc_url($fields['video']) : '';
     $sliders = !empty($fields['img_slider']) ? $fields['img_slider'] : '';
 ?>
-    <section class="block-intro <?php echo $reversed;?> full-width">
+    <section class="block-intro <?php echo $reversed;?>full-width">
         <div class="container">
             <div class="inner">
                 <div class="intro-content">

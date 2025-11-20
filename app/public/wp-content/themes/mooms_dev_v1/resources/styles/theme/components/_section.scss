@@ -19,6 +19,10 @@ section {
         padding-right: calc(var(--bs-gutter-x) * 1);
         padding-left: calc(var(--bs-gutter-x) * 1);
     }
+
+    &:last-child {
+        padding-bottom: 0;
+    }
 }
 
 figure {

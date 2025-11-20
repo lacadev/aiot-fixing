@@ -52,8 +52,6 @@ class CustomDashboard
         if ($hook !== 'index.php') {
             return;
         }
-
-        // ĐÃ GỘP dashboard.js vào admin bundle, không enqueue riêng nữa
     }
 
     /**

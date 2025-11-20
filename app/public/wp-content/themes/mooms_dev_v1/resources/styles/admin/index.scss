@@ -475,3 +475,9 @@ button[data-toggle="password-toggle"] {
 .cf-container__tabs-list .cf-container__tabs-item--current {
     background-color: #e2e4e7 !important;
 }
+
+// rich text editor
+.mce-edit-area {
+    max-height: 500px;
+    overflow-y: auto;
+}
