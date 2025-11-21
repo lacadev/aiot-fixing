@@ -5,7 +5,7 @@ Tags: seo, WordPress SEO, google search console, schema, redirection,
 Tested up to: 6.8
 Requires at least: 6.3
 Requires PHP: 7.4
-Stable tag: 1.0.254
+Stable tag: 1.0.257
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -339,11 +339,11 @@ Please drop us an email at support@rankmath.com, and we will be more than happy 
 
 == Changelog ==
 
-= 1.0.254 [Sept 26, 2025] =
-- Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) was not considering the Product's short description when calculating the SEO score
-- Fixed: PHP warning when using [Focus Keyword variable](https://rankmath.com/kb/variables-in-seo-title-description/#focus-keyword) with keywords containing special characters
-- Fixed: Deprecated capability used in the plugin to access Rank Math Dashboard
-- Fixed: [Fallback behaviour](https://rankmath.com/kb/general-settings/#fallback-behaviour) was not working when URL contained query parameters of page IDs
-- Fixed: Updating the [Sitemap settings](https://rankmath.com/kb/configure-sitemaps/) was not clearing the Sitemap cache
+= 1.0.257 [Nov 05, 2025] =
+- Added: [Fix with AI tool](https://rankmath.com/kb/fix-seo-tests-with-content-ai/) for the content tests is now available in the Elementor editor
+- Fixed: Fix with AI tool was not working properly in the Classic editor when ACF plugin is active
+- Fixed: Incorrect URL was used in the [Setup Wizard](https://rankmath.com/kb/how-to-setup/#starting-the-setup-wizard) on sub-directory setups
+- Fixed: Missing option to remove the selected [About & Contact page in the Local SEO settings](https://rankmath.com/kb/local-seo/#about-page)
+- Fixed: PHP warning in the [Email reports](https://rankmath.com/kb/seo-email-reporting/) on some setups
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
