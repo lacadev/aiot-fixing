@@ -109,21 +109,25 @@ select.wpcf7-form-control {
 }
 
 h3.title {
-    font-size: clamp(2.2rem, 2.5vw, 3rem);
+    margin-bottom: 2rem;
     font-weight: 700;
-    line-height: 2.2;
+    line-height: 1.4;
+
+    @include resFont(2.2, 3);
 }
 
 h2.block-title {
-    font-size: clamp(3rem, 2.5vw, 4.6rem);
     line-height: 2.2;
     font-weight: 700;
+
+    @include resFont(3, 4.6);
 }
 .block-desc {
-    font-size: clamp(1.4rem, 2.5vw, 1.6rem);
     font-weight: 400;
     line-height: 2;
     letter-spacing: 0.04em;
+
+    @include resFont(1.4, 1.6);
 }
 .btn-url {
     --mainColor: #{$primaryColor};
@@ -187,9 +191,6 @@ h2.block-title {
             }
         }
         }
-    }
-    @include maxWidth($md) {
-        padding: 1.8rem 8.2rem;
     }
 
     & ._circle {
@@ -352,6 +353,57 @@ h2.block-title {
         &:hover ._label {
             color: #fff;
         }
+        }
+    }
+
+    @include maxWidth($md) {
+        padding: 1.8rem 8.2rem;
+
+        &:not(.not-label) {
+            ._icon {
+                .mm-svg {
+                    opacity: 1;
+                    animation: none;
+                    @include iconify-mask("guidance:left-arrow", 2rem, 2rem, $primaryColor);
+                }
+
+                &::before {
+                    transform: translate(-50%, -50%) scale(0);
+                }
+
+                &::after {
+                    background-color: #fff;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+
+            ._label {
+                color: #fff;
+            }
+
+            ._circle::before {
+                transform: scale(1);
+                background-color: $primaryColor;
+            }
+        }
+
+        &.not-label {
+            ._icon {
+                &::before,
+                &::after {
+                width: 2rem;
+                height: 2rem;
+                transform: translate(-50%, -50%) scale(2);
+                background-color: $primaryColor;
+                }
+
+                .mm-svg {
+                opacity: 1;
+                animation: none;
+                width: 2rem;
+                height: 2rem;
+                }
+            }
         }
     }
 }

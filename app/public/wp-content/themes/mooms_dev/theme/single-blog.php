@@ -12,10 +12,12 @@
 
 <div class="page aiot-blog" data-aos="fade-in" data-aos-duration="2000">
 	<div class="mm-container">
-		<?php theBreadcrumb() ?>
+		<div class="breadcrumb-top">
+			<?php theBreadcrumb() ?>
+		</div>
 		<div class="aiot-header">
 			<div class="aiot-title">
-				<?php the_title(); ?>		
+				<?php the_title(); ?>
 			</div>
 		</div>
 		<div class="aiot-content">

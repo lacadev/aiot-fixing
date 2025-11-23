@@ -1,12 +1,17 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
+
+.breadcrumb-top {
+  padding-top: 6rem;
+}
+
 nav.rank-math-breadcrumb {
   a {
     width: fit-content;
     display: inline-block;
-    font-size: clamp(1.3rem, 5vw, 1.4rem);
     font-weight: 600;
+    margin-top: 0;
     color: $textColor;
     text-decoration: none;
     text-decoration: underline;
@@ -16,11 +21,14 @@ nav.rank-math-breadcrumb {
     transition: text-decoration-color 0.2s ease-out;
     transition: text-decoration-color 0.2s ease-out,
       -webkit-text-decoration-color 0.2s ease-out;
+
+    @include resFont(1.3, 1.4);
+
     &::after {
       content: "";
       display: block;
       position: relative;
-      bottom: 0.5rem;
+      bottom: 0rem;
       width: 100%;
       height: 1px;
       background: linear-gradient(0deg, #70635f, #70635f) no-repeat right bottom /
@@ -28,6 +36,7 @@ nav.rank-math-breadcrumb {
       background-size: 0 1px;
       transition: background-size 0.3s ease-out;
     }
+
     &:hover::after {
       background-size: 100% 1px;
       background-position-x: left;
@@ -35,9 +44,10 @@ nav.rank-math-breadcrumb {
   }
 
   .last {
-    font-size: clamp(1.3rem, 5vw, 1.4rem);
     font-weight: 700;
     color: $primaryColor;
+
+    @include resFont(1.3, 1.4);
   }
 }
 
@@ -45,21 +55,32 @@ h1.page-title {
   margin-top: 1.25vw;
   font-style: normal;
   font-weight: 600;
-  font-size: clamp(3rem, 5vw, 5.8rem);
   line-height: 1.5;
   letter-spacing: 0.06em;
   color: #251e1c;
+
+  @include resFont(3, 5.8);
 }
 
 .page-header {
-  padding: clamp(3rem, 5vw, 7rem) 0;
-  margin-bottom: clamp(3rem, 5vw, 10rem);
+  padding: 7rem 0;
+  margin-bottom: 10rem;
+
+  @include maxWidth($md) {
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+  }
 }
 
 .head-parent-page {
   // page thumbnail in parent page
   .page-thumbnail {
-    margin-bottom: clamp(3rem, 5vw, 5rem);
+    margin-bottom: 5rem;
+
+    @include maxWidth($md) {
+      margin-bottom: 3rem;
+    }
+
   }
 
   .page-excerpt {
@@ -69,10 +90,12 @@ h1.page-title {
 
 .head-child-page {
   position: relative;
+  margin-top: 1.5rem;
 
   @include maxWidth($md) {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 0;
 
     .page-thumbnail {
       margin-bottom: 3rem;
@@ -82,8 +105,7 @@ h1.page-title {
   }
 
   .page-title-breadcrumb {
-    padding: clamp(3rem, 5vw, 8rem) clamp(5rem, 5vw, 10rem)
-      clamp(5rem, 5vw, 10rem) clamp(3rem, 5vw, 5rem);
+    padding: 6rem 6rem 6rem 3rem;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -99,6 +121,14 @@ h1.page-title {
       min-width: 100%;
       order: 1;
     }
+  }
+}
+
+.page-content {
+  padding-top: 6rem;
+
+  @include maxWidth($md) {
+    padding-top: 0;
   }
 }
 
@@ -125,25 +155,28 @@ h1.page-title {
   }
 
   .parent-page {
-    // padding-bottom: clamp(3rem, 5vw, 5rem);
-    padding: clamp(3rem, 5vw, 8rem) clamp(5rem, 5vw, 10rem)
-      clamp(3rem, 5vw, 5rem) clamp(3rem, 5vw, 5rem);
+    padding: 6rem 6rem 6rem 3rem;
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+
+    @include maxWidth($md) {
+      padding: 3rem 5rem 3rem 3rem;
+    }
 
     .parent-link {
       position: relative;
       display: inline-block;
-      font-size: clamp(2rem, 5vw, 2.4rem);
       font-weight: $bold;
       letter-spacing: 0.25px;
       color: $textColor;
       transition: all 0.3s ease-out;
 
+      @include resFont(2, 2.4);
+
       &::after {
         content: "";
         display: block;
         position: relative;
-        bottom: 0.5rem;
+        bottom: -0.5rem;
         width: 100%;
         height: 1.8px;
         background: linear-gradient(0deg, $textColor, $textColor) no-repeat
@@ -161,8 +194,11 @@ h1.page-title {
     }
   }
   .children-page {
-    padding: clamp(3rem, 5vw, 5rem) clamp(5rem, 5vw, 10rem)
-      clamp(5rem, 5vw, 10rem) clamp(3rem, 5vw, 5rem);
+    padding: 5rem 3rem;
+
+    @include maxWidth($md) {
+      padding: 3rem 5rem 5rem 3rem;
+    }
 
     ul {
       @include ulReset;
@@ -170,11 +206,13 @@ h1.page-title {
         a {
           padding: 1.8rem 0;
           display: block;
-          font-size: clamp(1.6rem, 5vw, 1.8rem);
           font-weight: 600;
           color: $textColor;
           text-decoration: none;
           transition: color 0.3s ease-out;
+
+          @include resFont(1.6, 1.8);
+
           &:hover {
             color: $primaryColor;
           }
@@ -223,8 +261,7 @@ h1.page-title {
   }
 
   .page-content {
-    padding: clamp(3rem, 5vw, 8rem) clamp(5rem, 5vw, 10rem)
-      clamp(5rem, 5vw, 10rem) clamp(3rem, 5vw, 10rem);
+    padding: 8rem 10rem 10rem 10rem;
     max-width: 80%;
     flex: 1 1 80%;
     border-left: 2px solid rgba(0, 0, 0, 0.1);
@@ -244,15 +281,24 @@ h1.page-title {
 }
 
 .child-pages {
-  margin-top: clamp(7rem, 5vw, 10rem);
-  padding: clamp(7rem, 5vw, 10rem) 0;
+  margin-top: 10rem;
+  padding: 10rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  @include maxWidth($md) {
+    margin-top: 7rem;
+    padding: 7rem 0;
+  }
 
   ul {
     @include ulReset;
 
     li.child-page {
-      margin-bottom: clamp(6rem, 10vw, 15rem);
+      margin-bottom: 15rem;
+
+      @include maxWidth($md) {
+        margin-bottom: 6rem;
+      }
 
       .inner {
         position: relative;
@@ -318,5 +364,33 @@ h1.page-title {
         }
       }
     }
+  }
+}
+
+.aiot-header {
+  margin-bottom: 2rem;
+}
+
+.aiot-content {
+  h3.wp-block-heading {
+    margin-bottom: 1rem;
+  }
+
+  h4.wp-block-heading {
+    margin-bottom: 2rem;
+  }
+
+  ul.wp-block-list,
+  ol.wp-block-list {
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+
+  h2.wp-block-heading {
+    margin-bottom: 2rem;
   }
 }
