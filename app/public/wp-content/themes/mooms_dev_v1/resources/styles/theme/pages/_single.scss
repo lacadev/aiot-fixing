@@ -180,6 +180,7 @@ h1.page-title {
       // }
       &:hover {
         color: $primaryColor;
+        
         &::after {
           background-size: 0 1px;
           background-position-x: right;
@@ -288,7 +289,15 @@ h1.page-title {
     @include ulReset;
 
     li.child-page {
-      margin-bottom: clamp(6rem, 10vw, 15rem);
+      margin-bottom: 10rem;
+
+      @include maxWidth($lg) {
+        margin-bottom: 5rem;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .inner {
         position: relative;
@@ -372,7 +381,7 @@ h1.page-title {
     letter-spacing: 0.06em;
     color: #251e1c;
 
-    @include resFont(2rem, 4.5rem);
+    @include resFont(2, 4.5);
   }
 
   &__content {

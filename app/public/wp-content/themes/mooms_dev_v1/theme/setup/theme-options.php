@@ -18,12 +18,12 @@ $optionsPage = Container::make('theme_options', __('MMS Theme', 'mms'))
 	->set_page_menu_position(3)
 	->add_tab(__('Branding | Thương hiệu', 'mms'), [
 		Field::make('color', 'primary_color' . currentLanguage(), __('Primary Color', 'mms'))
-		->set_width(50)
-		->set_default_value('#d85040'),
+			->set_width(50)
+			->set_default_value('#d85040'),
 		Field::make('color', 'secondary_color' . currentLanguage(), __('Secondary Color', 'mms'))
-		->set_width(50)
-		->set_default_value('#5384ed'),
-		
+			->set_width(50)
+			->set_default_value('#5384ed'),
+
 		Field::make('image', 'logo' . currentLanguage(), __('Logo', 'mms'))
 			->set_width(33.33),
 		Field::make('image', 'footer_logo' . currentLanguage(), __('Footer Logo', 'mms'))
@@ -35,6 +35,10 @@ $optionsPage = Container::make('theme_options', __('MMS Theme', 'mms'))
 	->add_tab(__('Contact | Liên hệ', 'mms'), [
 		Field::make('html', 'info', __('', 'mms'))
 			->set_html('----<i> Information | Thông tin </i>----'),
+		Field::make('select', 'page_contact' . currentLanguage(), __('Contact page | Trang liên hệ', 'mms'))
+			->set_options(function () {
+				return getListAllPages();
+			}),
 		Field::make('text', 'company' . currentLanguage(), __('', 'mms'))
 			->set_width(50)
 			->set_attribute('placeholder', 'Company | Công ty'),
@@ -66,12 +70,10 @@ $optionsPage = Container::make('theme_options', __('MMS Theme', 'mms'))
 	])
 	->add_tab(__('Footer', 'mms'), [
 		Field::make('text', 'contact_label' . currentLanguage(), __('', 'mms'))
-			->set_width(50)
+			->set_width(30)
 			->set_attribute('placeholder', 'Contact label | Nhãn liên hệ'),
-		Field::make('text', 'contact_url' . currentLanguage(), __('', 'mms'))
-			->set_width(50)
-			->set_attribute('placeholder', 'Contact URL | Liên kết liên hệ'),
 		Field::make('textarea', 'contact_message' . currentLanguage(), __('', 'mms'))
+			->set_width(70)
 			->set_attribute('placeholder', 'Contact description | Mô tả liên hệ'),
 	])
 	->add_tab(__('Scripts', 'mms'), [

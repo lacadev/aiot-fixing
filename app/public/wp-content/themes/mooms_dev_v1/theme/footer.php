@@ -9,12 +9,14 @@
  */
 
 $home_url = pll_home_url();
+$contact = getOption('page_contact');
+
 ?>
 <footer id="footer">
 	<div class="footer-top">
 		<div class="mm-container">
 			<div class="inner">
-				<a class="contactLink" href="<?php echo esc_url(getOption('contact_url')); ?>">
+				<a class="contactLink" href="<?php echo esc_url(get_page_link($contact)); ?>">
 					<span class="_label"><?php echo esc_html(getOption('contact_label')); ?></span>
 					<span class="_circle"></span>
 					<span class="_message"><?php echo apply_filters('the_content', wp_kses_post(getOption('contact_message'))); ?></span>
