@@ -1,0 +1,527 @@
+@use "../abstracts/variables.scss" as *;
+@use "../abstracts/mixin.scss" as *;
+
+// Mixin containing all block styles
+// This allows reuse in both theme and editor contexts
+@mixin block-styles {
+  .block-intro {
+    --gap: 3rem;
+
+    position: relative;
+    overflow: hidden;
+
+    &.reversed {
+      .inner {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--gap);
+    }
+
+    .intro-content {
+      max-width: calc(35% - (var(--gap) / 2));
+      flex: 1 1 35%;
+    }
+
+    .pc-media {
+      max-width: calc(60% - (var(--gap) / 2));
+      flex: 1 1 60%;
+      position: relative;
+    }
+    .mb-media {
+      display: none;
+      padding: 0 0 2rem;
+    }
+
+    figure {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3rem;
+    }
+
+    .slider {
+      width: 56.4vw;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3rem;
+
+      @include maxWidth($md) {
+        width: 100%;
+      }
+
+      .slider-track {
+        display: flex;
+        gap: 2rem;
+        animation: infinite-scroll 70s linear infinite;
+      }
+
+      .item-slider {
+        flex: 0 0 auto;
+        .inner {
+          width: clamp(15rem, 20vw, 40rem);
+          border-radius: 3rem;
+        }
+      }
+
+      figure.media-custom {
+        padding-top: 150%;
+      }
+
+      @keyframes infinite-scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-185.7%);
+        }
+      }
+    }
+
+    @include maxWidth($md) {
+      .pc-media {
+        display: none;
+      }
+
+      .mb-media {
+        display: block;
+      }
+
+      .mb-media,
+      .intro-content {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+  }
+
+  .block-media {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .block-welcome {
+    padding: 3rem 0 0;
+    position: relative;
+    overflow: hidden;
+
+    .mm-container-fluid {
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-circle {
+      position: relative;
+      width: 18rem;
+      height: 18rem;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        animation: rotateText 14s linear infinite;
+        min-height: clamp(10rem, 20vw, 18rem);
+        min-width: clamp(10rem, 20vw, 18rem);
+      }
+
+      text {
+        font-size: 1.45rem;
+        fill: $textColor;
+        text-transform: uppercase;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include iconify-mask("guidance:down-arrow", 5rem, 5rem, $textColor);
+
+        @include maxWidth($sm) {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+    }
+
+    .welcome-aiot {
+      display: inline-flex;
+      align-items: center;
+      font-size: clamp(5rem, 20vw, 13rem);
+      font-weight: $thin;
+      line-height: 1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0.3;
+    }
+
+    @keyframes rotateText {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+  }
+
+  .block-service {
+    --gap: 3rem;
+
+    &.reversed {
+      .inner {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--gap);
+    }
+
+    .service-content {
+      max-width: calc(35% - (var(--gap) / 2));
+      flex: 1 1 35%;
+    }
+
+    .services-list {
+      max-width: calc(60% - (var(--gap) / 2));
+      flex: 1 1 60%;
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+      .name {
+        font-size: clamp(1.8rem, 2.5vw, 3rem);
+        font-weight: 700;
+        line-height: 2.2;
+      }
+      .desc {
+        line-height: 1.8;
+        letter-spacing: 1px;
+      }
+    }
+
+    .service-item {
+      display: flex;
+    }
+
+    @include maxWidth($md) {
+      .service-content,
+      .services-list {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+  }
+
+  .block-contact {
+    --gap: 3rem;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--gap);
+    text-align: center;
+
+    .google-map {
+      max-width: calc(35% - (var(--gap) / 2));
+      flex: 1 1 35%;
+
+      @include maxWidth($md) {
+        max-width: 100%;
+        flex: 1 1 100%;
+        order: 2;
+        height: 30rem;
+      }
+    }
+
+    .info-contact {
+      max-width: calc(60% - (var(--gap) / 2));
+      flex: 1 1 60%;
+
+      @include maxWidth($md) {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+
+    .other-contact {
+      margin: 0 auto;
+      padding: 2rem 0;
+      // max-width: 60rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      a {
+        padding: 1rem 4rem;
+        background-color: $primaryColor;
+        border: 2px solid $primaryColor;
+        // border-radius: 3rem;
+        color: #fff;
+        font-size: clamp(1.3rem, 5vw, 1.5rem);
+
+        &:hover {
+          background-color: #fff;
+          color: $primaryColor;
+        }
+      }
+    }
+
+    .info-company {
+      padding: 2rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+
+      @include maxWidth($sm) {
+        padding: 2rem 0;
+      }
+
+      .info-item {
+        max-width: calc(50% - (var(--gap) / 2));
+        flex: 1 1 50%;
+
+        @include maxWidth($sm) {
+          max-width: 100%;
+          flex: 1 1 100%;
+        }
+      }
+
+      * > a {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: $textColor;
+        text-align: start;
+
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+
+      .address,
+      .hour {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-align: start;
+      }
+
+      .icon-address {
+        @include iconify-mask("mdi:place-outline", 2rem, 2rem, $primaryColor);
+      }
+
+      .icon-hour {
+        @include iconify-mask("tabler:clock-hour-9", 2rem, 2rem, $primaryColor);
+      }
+
+      .icon-phone {
+        @include iconify-mask(
+          "fluent:phone-28-regular",
+          2rem,
+          2rem,
+          $primaryColor
+        );
+      }
+
+      .icon-mail {
+        @include iconify-mask(
+          "fluent:mail-28-regular",
+          2rem,
+          2rem,
+          $primaryColor
+        );
+      }
+    }
+
+    .policy-scroll {
+      padding: 1rem;
+      max-height: 30rem;
+      overflow-y: auto;
+      text-align: start;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  form {
+    margin: 0 auto;
+    width: 100%;
+
+    .form-row {
+      margin: 3rem 0;
+      display: flex;
+      gap: 4rem;
+
+      @include maxWidth($lg) {
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .input-data {
+        position: relative;
+        width: 100%;
+        height: 4rem;
+        text-align: start;
+
+        label {
+          position: absolute;
+          pointer-events: none;
+          bottom: 1rem;
+          font-size: 1.5rem;
+          transition: all 0.3s ease;
+        }
+
+        .underline {
+          position: absolute;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+
+          &:before {
+            position: absolute;
+            content: "";
+            height: 2px;
+            width: 100%;
+            background: $primaryColor;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+          }
+        }
+
+        input {
+          &:focus ~ .underline:before,
+          &:valid ~ .underline:before {
+            transform: scaleX(1);
+          }
+        }
+      }
+
+      .textarea {
+        height: 70px;
+
+        label {
+          width: 100%;
+          bottom: 4rem;
+          background: #fff;
+        }
+
+        textarea {
+          resize: none;
+          padding-top: 10px;
+
+          &:focus ~ .underline:before,
+          &:valid ~ .underline:before {
+            transform: scale(1);
+          }
+        }
+      }
+
+      .input-data input,
+      .textarea textarea {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+        font-size: 1.6rem;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+      }
+
+      .input-data input:focus ~ label,
+      .textarea textarea:focus ~ label,
+      .input-data input:valid ~ label,
+      .textarea textarea:valid ~ label {
+        transform: translateY(-20px);
+        font-size: 1.25rem;
+        color: $primaryColor;
+      }
+
+      &.submit-btn {
+        .input-data {
+          .inner {
+            text-align: center;
+
+            button[type="submit"] {
+              padding: 1rem 4rem 1rem 3rem;
+              display: inline-flex;
+              align-items: center;
+              background-color: $primaryColor;
+              color: #fff;
+              font-weight: $semiBold;
+              border: none;
+              border-radius: 8rem;
+              transition: all 0.2s ease-in-out;
+              cursor: pointer;
+              text-align: center;
+
+              svg {
+                margin-right: 0.5rem;
+                width: 3rem;
+                height: auto;
+                fill: #fff;
+              }
+
+              &:hover {
+                background-color: $greenColor;
+
+                svg {
+                  animation: contact-icon-hover 0.7s ease-out 0s 1 normal both;
+                }
+              }
+
+              &[disabled] {
+                cursor: not-allowed !important;
+                background-color: gray !important;
+
+                &:hover {
+                  background-color: gray !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .block-blog {
+    text-align: center;
+    background-color: #f4f4f4;
+
+    .btn-url {
+      margin-top: 2.5rem;
+    }
+  }
+}
+
+// Apply block styles at root level for theme
+@include block-styles;

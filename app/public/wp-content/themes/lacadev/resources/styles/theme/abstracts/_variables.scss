@@ -1,0 +1,35 @@
+// Fonts
+$primaryFont: "Noto Sans JP", sans-serif;
+$secondaryFont: "Noto Sans", sans-serif;
+
+$yellowColor: #f1bf42;
+$greenColor: #6ab558;
+$textColor: #333;
+
+// Admin colors
+$primaryColorAd: var(--primary-color-ad);
+$secondaryColorAd: var(--secondary-color-ad);
+$backgroundColorAd: var(--bg-color-ad);
+$textColorAd: var(--text-color-ad);
+
+// Theme colors
+$primaryColor: var(--primary-color);
+$secondaryColor: var(--secondary-color);
+
+$thin: 100;
+$extraLight: 200;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semiBold: 600;
+$bold: 700;
+$extraBold: 800;
+$blackWeight: 900;
+
+$xs: 576px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+$xl: 1440px;
+
+$container-mw: 144rem;
