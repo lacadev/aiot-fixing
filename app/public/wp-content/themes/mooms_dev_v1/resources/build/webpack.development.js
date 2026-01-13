@@ -115,21 +115,7 @@ module.exports = {
                 ],
             },
             {
-                test: utils.tests.images,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        // options: {
-                        //     name: file => `/images/[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
-                        // },
-                        options: {
-                            name: '[path][name].[ext]',
-                            context: utils.srcPath(), // hoặc sử dụng đường dẫn thích hợp để webpack lấy đường dẫn tương đối chính xác
-                            outputPath: 'images', // Đảm bảo hình ảnh được đặt vào thư mục /dist/images/
-                            publicPath: '../images', // Đảm bảo đường dẫn trong CSS là đúng
-                        },
-                    },
-                ],
+                test: utils.tests.images,               
             },
             {
                 test: utils.tests.fonts,
