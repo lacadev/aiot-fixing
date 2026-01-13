@@ -8,6 +8,8 @@
 /wp-content/debug.log
 wp-content/mu-plugins/
 wp-content/uploads-local/
+wp-content/ai1wm-backups/
+wp-content/litespeed/
 
 wp-config.php
 wp-config-sample.php
