@@ -129,15 +129,7 @@ module.exports = {
                 ],
             },
             {
-                test: utils.tests.images,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: file => `images/[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
-                        },
-                    },
-                ],
+                test: utils.tests.images
             },
             {
                 test: utils.tests.fonts,
