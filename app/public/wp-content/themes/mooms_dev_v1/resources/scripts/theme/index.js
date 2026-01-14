@@ -344,6 +344,11 @@ function setupAjaxSendMail() {
     });
   }
 
+  // Block non-numeric input for phone number
+  $('#contactForm').on('input', 'input[name="phone_number"]', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+
   $('#contactForm').on('submit', function (e) {
     e.preventDefault();
     if (getCookie(COOKIE_KEY)) {
@@ -355,6 +360,21 @@ function setupAjaxSendMail() {
       });
     }
     var formData = $(this).serialize();
+    
+    // Validate Phone Number
+    const phoneInput = $(this).find('input[name="phone_number"]').val();
+    const vnf_regex = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
+    
+    if(phoneInput && !vnf_regex.test(phoneInput)){
+        Swal.fire({
+          icon: 'error',
+          title: (typeof themeData !== 'undefined' && themeData.i18n) ? themeData.i18n.error_title : 'Số điện thoại không hợp lệ',
+          text: (typeof themeData !== 'undefined' && themeData.i18n) ? themeData.i18n.invalid_phone_text : 'Vui lòng nhập đúng định dạng số điện thoại Việt Nam.',
+          confirmButtonText: (typeof themeData !== 'undefined' && themeData.i18n) ? themeData.i18n.close : 'Đóng'
+        });
+        return; 
+    }
+
     // Determine correct admin-ajax endpoint on frontend
     var endpoint = (typeof ajaxurl !== 'undefined' && ajaxurl)
       ? ajaxurl

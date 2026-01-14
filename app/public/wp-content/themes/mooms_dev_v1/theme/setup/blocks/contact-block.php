@@ -95,7 +95,7 @@ Block::make(__('Block Contact', 'gaumap'))
                         <label for="email">Email</label>
                     </div>
                     <div class="input-data">
-                        <input type="number" name="phone_number" required>
+                        <input type="tel" name="phone_number" required>
                         <div class="underline"></div>
                         <label for="phone_number">Phone</label>
                     </div>

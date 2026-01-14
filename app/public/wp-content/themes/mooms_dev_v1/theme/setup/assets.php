@@ -102,6 +102,19 @@ function app_action_theme_enqueue_assets()
         'isHome' => is_home(),
         'isMobile' => wp_is_mobile(),
         'currentUrl' => get_permalink(),
+        'i18n' => [
+            'error_title' => __('Invalid Phone Number', 'gaumap'),
+            'invalid_phone_text' => __('Please enter a valid phone number (Vietnam or Japan format).', 'gaumap'),
+            'already_sent_title' => __('Request already sent', 'gaumap'),
+            'already_sent_text' => __('You have sent a request within the last 24 hours. Please try again later.', 'gaumap'),
+            'success_title' => __('Sent successfully', 'gaumap'),
+            'success_text_default' => __('Thank you for contacting us.', 'gaumap'),
+            'error_text' => __('An error occurred. Please try again.', 'gaumap'),
+            'connection_error_title' => __('Connection Error', 'gaumap'),
+            'connection_error_text' => __('An error occurred. Please try again.', 'gaumap'),
+            'ok' => __('OK', 'gaumap'),
+            'close' => __('Close', 'gaumap'),
+        ],
     ]);
 }
 
