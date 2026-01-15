@@ -80,7 +80,7 @@ Block::make(__('Block Intro', 'gaumap'))
     $video = !empty($fields['video']) ? esc_url($fields['video']) : '';
     $sliders = !empty($fields['img_slider']) ? $fields['img_slider'] : '';
 ?>
-    <section class="block-intro <?php echo $reversed;?>full-width">
+    <section class="block-intro <?php echo $reversed;?>">
         <div class="container">
             <div class="inner">
                 <div class="intro-content">
@@ -121,7 +121,7 @@ Block::make(__('Block Intro', 'gaumap'))
                     </div>
                     
                     <?php if ($desc): ?>
-                        <p class="block-desc"><?= $desc; ?></p>
+                        <p class="block-desc"><?= nl2br(htmlspecialchars($desc)); ?></p>
                     <?php endif; ?>
                     
                     <?php if ($url): ?>
