@@ -34,6 +34,7 @@ function initializePageFeatures() {
   alertDropdownSubMenu();
   setupSelect2();
   setupProjectFilter();
+  initTimeline(); // Fix timeline hiển thị sau khi navigate với Swup
 }
 
 /**
@@ -655,4 +656,20 @@ function alertDropdownSubMenu() {
       this.classList.toggle('is-open');
     });
   });
+}
+
+/**
+ * Initialize Timeline Block - Fix display after Swup navigation
+ */
+function initTimeline() {
+  // Đảm bảo timeline icons hiển thị
+  const timelineIcons = document.querySelectorAll('.timeline-block-icon svg');
+  timelineIcons.forEach(icon => {
+    icon.style.visibility = 'visible';
+  });
+
+  // AOS refresh để trigger lại animations nếu có
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
 }
