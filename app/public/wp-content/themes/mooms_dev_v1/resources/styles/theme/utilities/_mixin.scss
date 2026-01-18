@@ -132,7 +132,7 @@
   mask: url("https://api.iconify.design/#{$icon}.svg") no-repeat center;
   -webkit-mask-size: contain;
   mask-size: contain;
-  cursor: pointer;
+  cursor: unset;
 }
 
 // Transition
