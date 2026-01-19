@@ -300,11 +300,21 @@ header {
           text-decoration: none;
           white-space: nowrap;
           color: $textColor;
+          transition: color 0.3s ease;
 
           @include resFont(1.4, 1.6);
 
+          .iconify {
+            color: $textColor;
+            transition: color 0.3s ease;
+          }
+
           &:hover {
             color: $primaryColor;
+
+            .iconify {
+              color: $primaryColor;
+            }
           }
 
           &[hreflang="vi"] {
@@ -316,11 +326,24 @@ header {
 
     .global {
       @include iconify("ant-design:global-outlined", 2.3rem);
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("https://api.iconify.design/ant-design:global-outlined.svg?color=%23d85040");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
     }
 
     &:hover {
-      .global {
-        background-image: url(https://api.iconify.design/ant-design:global-outlined.svg?color=%23d85040);
+      .global::after {
+        opacity: 1;
       }
 
       .current-language {
@@ -341,6 +364,7 @@ header {
     font-weight: $semiBold;
     color: $textColor;
     cursor: pointer;
+    transition: color 0.3s ease;
   }
 
   .contact {
