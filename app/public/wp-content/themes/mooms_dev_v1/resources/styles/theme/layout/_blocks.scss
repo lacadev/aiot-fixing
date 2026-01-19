@@ -1,6 +1,27 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
+section {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+
+    @include maxWidth($md) {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    @include maxWidth($sm) {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .row > * {
+        padding-right: calc(var(--bs-gutter-x) * 1);
+        padding-left: calc(var(--bs-gutter-x) * 1);
+    }
+}
+
+
 .block-intro {
   --gap: 3rem;
 

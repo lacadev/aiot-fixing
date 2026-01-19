@@ -1,9 +1,18 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
+.home footer {
+    margin-top: 0;
+}
+
 footer {
+    margin-top: 10rem;
     padding: 0;
     background-color: #f4f4f4;
+
+    @include maxWidth($md) {
+        margin-top: 5rem;
+    }
 
     .footer-top {
         padding: 5rem 0;

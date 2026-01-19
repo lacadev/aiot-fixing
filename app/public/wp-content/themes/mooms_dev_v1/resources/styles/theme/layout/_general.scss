@@ -43,24 +43,24 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-h1::selection,
-h2::selection,
-h3::selection,
-h4::selection,
-h5::selection,
-h6::selection,
-a::selection,
-p::selection,
-span::selection,
-img::selection,
-label::selection,
-li::selection,
-button::selection,
-input::selection,
-bdi::selection {
-  color: #fff;
-  background-color: $primaryColor;
-}
+// h1::selection,
+// h2::selection,
+// h3::selection,
+// h4::selection,
+// h5::selection,
+// h6::selection,
+// a::selection,
+// p::selection,
+// span::selection,
+// img::selection,
+// label::selection,
+// li::selection,
+// button::selection,
+// input::selection,
+// bdi::selection {
+//   color: #fff;
+//   background-color: $primaryColor;
+// }
 
 h1,
 h2,

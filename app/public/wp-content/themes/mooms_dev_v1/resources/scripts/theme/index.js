@@ -3,7 +3,7 @@ import "@styles/theme";
 import "airbnb-browser-shims";
 import "./pages/*.js";
 import "popper.js";
-import Swup from 'swup';
+// import Swup from 'swup';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AOS from "aos/dist/aos";
@@ -13,12 +13,12 @@ import $ from "jquery";
 import "select2";
 
 jQuery(document).ready(function () {
-  const swup = new Swup();
+  // const swup = new Swup();
   initializePageFeatures();
 
-  swup.hooks.on('content:replace', () => {
-    initializePageFeatures();
-  });
+  // swup.hooks.on('content:replace', () => {
+  //   initializePageFeatures();
+  // });
 });
 
 function initializePageFeatures() {
