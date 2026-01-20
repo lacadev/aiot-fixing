@@ -95,7 +95,7 @@ $parentLink = get_the_permalink($parentPage->ID);
 					endif;
 					?>
 					<?php
-					if (get_the_excerpt()):
+					if (has_excerpt()):
 						?>
 						<div class="page-excerpt">
 							<?php echo apply_filters('the_content', get_the_excerpt()); ?>

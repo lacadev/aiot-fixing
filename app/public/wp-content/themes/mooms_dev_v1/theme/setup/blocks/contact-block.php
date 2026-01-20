@@ -80,24 +80,24 @@ Block::make(__('Block Contact', 'gaumap'))
                     <div class="input-data">
                         <input type="text" name="first_name" required>
                         <div class="underline"></div>
-                        <label for="first_name">First Name</label>
+                        <label for="first_name"><?php _e('First name', 'mms') ?></label>
                     </div>
                     <div class="input-data">
                         <input type="text" name="last_name" required>
                         <div class="underline"></div>
-                        <label for="last_name">Last Name</label>
+                        <label for="last_name"><?php _e('Last name', 'mms') ?></label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-data">
                         <input type="text" name="email" required>
                         <div class="underline"></div>
-                        <label for="email">Email</label>
+                        <label for="email"><?php _e('Email', 'mms') ?></label>
                     </div>
                     <div class="input-data">
                         <input type="tel" name="phone_number" required>
                         <div class="underline"></div>
-                        <label for="phone_number">Phone</label>
+                        <label for="phone_number"><?php _e('Phone', 'mms') ?></label>
                     </div>
                 </div>
                 <div class="form-row">
@@ -105,7 +105,7 @@ Block::make(__('Block Contact', 'gaumap'))
                         <textarea rows="8" cols="80" name="message" required></textarea>
                         <br />
                         <div class="underline"></div>
-                        <label for="message">Write your message</label>
+                        <label for="message"><?php _e('Write your message', 'mms') ?></label>
                         <br />
                     </div>
                 </div>
