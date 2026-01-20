@@ -135,6 +135,20 @@
 			</div>
 		</header>
 
+		<?php
+		global $post;
+		$children = [];
+		if (is_page() && $post) {
+			$children = get_pages([
+				'child_of' => $post->ID,
+				'sort_column' => 'menu_order',
+				'sort_order' => 'ASC',
+				'parent' => $post->ID
+			]);
+		}
+
+		if (!empty($children)) :
+		?>
 		<div id="list-content" class="list-content">
 			<aside class="list-menu">
 				<button class="list-menu__toggle" type="button">
@@ -155,19 +169,16 @@
 						</div>
 						<nav class="list-sidebar">
 							<ul class="list-sidebar__child-list">
-								<li><a href="#">トップメッセージ</a></li>
-								<li><a href="#">沿革</a></li>
-								<li><a href="#">ビジョン・ミッション</a></li>
-								<li><a href="#">パートナーズ・ネットワーク</a></li>
-								<li><a href="#">会社概要</a></li>
-								<li><a href="#">役員紹介</a></li>
-								<li><a href="#">開発実績</a></li>
+								<?php foreach ($children as $child) : ?>
+									<li><a href="<?php echo get_permalink($child->ID); ?>"><?php echo get_the_title($child->ID); ?></a></li>
+								<?php endforeach; ?>
 							</ul>
 						</nav>
 					</div>
 				</div>
 			</aside>
 		</div>
+		<?php endif; ?>
 		<!-- Bottom Navigation for mobile -->
 		<div class="mobile-header">
 			<?php
