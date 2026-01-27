@@ -253,9 +253,81 @@ h2.block-title {
         }
     }
 
+    @include maxWidth($xs) {
+        padding: 1.5rem 5rem;
+
+        ._label {
+            font-size: 1.3rem;
+        }
+
+        ._circle {
+            &::before {
+                transform: scale(1);
+                background-color: var(--mainColor);
+            }
+        }
+
+        ._icon {
+            width: 2.8rem;
+            height: 2.8rem;
+            right: 1.2rem;
+
+            &::before {
+                transform: translate(-50%, -50%) scale(0);
+            }
+
+            &::after {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            @media (hover: hover) {
+                &:hover::after {
+                    background-color: var(--mainColor);
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+            }
+           
+
+            .mm-svg {
+                opacity: 1;
+                background-color: var(--mainColor);
+                transform: scale(0.8);
+                animation: kv-link-arrow-hover-mobile 0.4s ease-out 0.2s 1 normal both;
+
+                &::after {
+                    opacity: 0;
+                }
+            }
+        }
+
+        @keyframes kv-link-arrow-hover-mobile {
+            from {
+                transform: translateX(-150%) scale(0.8) scaleY(0.1);
+            }
+            to {
+                transform: translateX(0) scale(0.8) scaleY(1);
+            }
+        }
+
+        &:hover {
+            ._circle::before {
+                background-color: #fff;
+            }
+
+            ._icon .mm-svg {
+                background-color: #fff;
+            }
+        }
+    }
+
     @keyframes kv-link-arrow-normal {
         to {
-        transform: translateX(150%) scaleY(0.1);
+            transform: translateX(150%) scaleY(0.1);
+        }
+    }
+
+    @keyframes kv-link-arrow-hover {
+        from {
+            transform: translateX(-150%) scaleY(0.1);
         }
     }
 
@@ -284,11 +356,7 @@ h2.block-title {
         }
         }
 
-        @keyframes kv-link-arrow-hover {
-        from {
-            transform: translateX(-150%) scaleY(0.1);
-        }
-        }
+
     }
 
     &.is-disabled {
