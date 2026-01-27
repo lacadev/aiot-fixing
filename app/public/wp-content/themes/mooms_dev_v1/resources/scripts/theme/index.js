@@ -272,27 +272,31 @@ function setupSubmenuToggleHandling() {
  */
 function setupHideHeaderOnScroll() {
   let lastScrollTop = 0;
-  let header = document.getElementById('header');
+  const header = document.getElementById('header');
+  const mobileHeader = document.querySelector('.mobile-header');
   let scrollTimeout;
 
   window.addEventListener('scroll', function () {
-    clearTimeout(scrollTimeout); // Clear timeout khi có sự kiện scroll xảy ra
+    clearTimeout(scrollTimeout);
 
-    let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (currentScrollTop > lastScrollTop) {
+    if (currentScrollTop > lastScrollTop && currentScrollTop > 50) {
       // Khi scroll xuống, ẩn header
-      header.classList.add('hidden');
-    } else {
+      header?.classList.add('hidden');
+      mobileHeader?.classList.add('hidden');
+    } else if (currentScrollTop < lastScrollTop) {
       // Khi scroll lên, hiện header
-      header.classList.add('hidden');
+      header?.classList.remove('hidden');
+      mobileHeader?.classList.remove('hidden');
     }
 
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Ngăn việc giá trị scrollTop là âm
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
 
-    // Chờ một khoảng thời gian sau khi cuộn để hiện lại header nếu người dùng ngừng cuộn
+    // Sau khi ngừng cuộn 500ms thì hiện lại (theo logic cũ)
     scrollTimeout = setTimeout(() => {
-      header.classList.remove('hidden');
+      header?.classList.remove('hidden');
+      mobileHeader?.classList.remove('hidden');
     }, 500);
   });
 }
@@ -430,14 +434,11 @@ function setupMenuMobile() {
   const menuItems    = document.querySelectorAll('.mobile-menu__menu li');
   const globalBtn    = menuContent?.querySelector('.mobile-menu__header .language .global');
   const dropdownItems = document.querySelectorAll('.nav_menu > li.nav__dropdown');
-  const modal         = document.querySelector('.list-modal');
-  const overlay       = document.querySelector('.list-modal__overlay');
-  const listMenuToggleBtn = document.querySelector('.list-menu__toggle');
 
   const hideHeader = () => mobileHeader?.classList.add('hidden');
   const showHeader = () => mobileHeader?.classList.remove('hidden');
 
-  toggleBtn?.addEventListener('click', (e) => {
+  $(toggleBtn).off('click').on('click', (e) => {
     e.stopPropagation();
 
     // Mark position
@@ -464,7 +465,7 @@ function setupMenuMobile() {
   });
 
   // Toggle languge
-  globalBtn?.addEventListener('click', (e) => {
+  $(globalBtn).off('click').on('click', (e) => {
     if (window.innerWidth < 769) {
       e.stopPropagation();
       globalBtn.classList.toggle('active');
@@ -472,7 +473,7 @@ function setupMenuMobile() {
   });
 
   // Close mobile menu button
-  closeBtn?.addEventListener('click', (e) => {
+  $(closeBtn).off('click').on('click', (e) => {
     e.stopPropagation();
 
     // Hide menu
@@ -512,7 +513,7 @@ function setupMenuMobile() {
 
     item.classList.add('has-submenu');
 
-    link.addEventListener('click', (e) => {
+    $(link).off('click').on('click', (e) => {
       e.preventDefault();
 
       const isOpen = item.classList.contains('open');
@@ -534,26 +535,34 @@ function setupMenuMobile() {
     });
   });
 
-  // Open list-content modal
-  listMenuToggleBtn.addEventListener('click', () => {
-    const isActive = modal.classList.contains('active');
+  // Open list-content modal (DELEGATED for PJAX)
+  $(document).off('click', '.list-menu__toggle').on('click', '.list-menu__toggle', function() {
+    const $modal = $('.list-modal');
+    const $btn = $(this);
+    const isActive = $modal.hasClass('active');
+    
     if (!isActive) {
-      modal.classList.add('active');
-      listMenuToggleBtn.classList.add('active');
+      $modal.addClass('active');
+      $btn.addClass('active');
       document.body.classList.add('no-scroll');
     } else {
-      closeModal();
+      closeModal($modal, $btn);
     }
   });
 
-  overlay.addEventListener('click', closeModal);
+  $(document).off('click', '.list-modal__overlay').on('click', '.list-modal__overlay', function() {
+    closeModal($('.list-modal'), $('.list-menu__toggle'));
+  });
 
-  function closeModal() {
-    modal.classList.add('closing');
-    listMenuToggleBtn.classList.remove('active');
+  function closeModal($m, $b) {
+    const $modal = $m || $('.list-modal');
+    const $btn = $b || $('.list-menu__toggle');
+    
+    $modal.addClass('closing');
+    $btn.removeClass('active');
 
     setTimeout(() => {
-      modal.classList.remove('active', 'closing');
+      $modal.removeClass('active ' + 'closing');
       document.body.classList.remove('no-scroll');
     }, 400);
   }

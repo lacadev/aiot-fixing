@@ -135,50 +135,6 @@
 			</div>
 		</header>
 
-		<?php
-		global $post;
-		$children = [];
-		if (is_page() && $post) {
-			$children = get_pages([
-				'child_of' => $post->ID,
-				'sort_column' => 'menu_order',
-				'sort_order' => 'ASC',
-				'parent' => $post->ID
-			]);
-		}
-
-		if (!empty($children)) :
-		?>
-		<div id="list-content" class="list-content">
-			<aside class="list-menu">
-				<button class="list-menu__toggle" type="button">
-					<span class="list-menu__label">Business List</span>
-					<span class="list-menu__icon">
-						<span class="list-menu__bar"></span>
-						<span class="list-menu__bar"></span>
-						<span class="list-menu__bar"></span>
-					</span>
-				</button>
-
-				<div class="list-modal mm-container">
-					<div class="list-modal__overlay">
-					</div>
-					<div class="list-modal__content">
-						<div class="list-modal__header">
-							<h3>Business List</h3>
-						</div>
-						<nav class="list-sidebar">
-							<ul class="list-sidebar__child-list">
-								<?php foreach ($children as $child) : ?>
-									<li><a href="<?php echo get_permalink($child->ID); ?>"><?php echo get_the_title($child->ID); ?></a></li>
-								<?php endforeach; ?>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</aside>
-		</div>
-		<?php endif; ?>
 		<!-- Bottom Navigation for mobile -->
 		<div class="mobile-header">
 			<?php
