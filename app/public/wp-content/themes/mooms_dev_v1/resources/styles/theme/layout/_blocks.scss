@@ -628,12 +628,45 @@ html[lang=vi] {
 
   .page-content h2.wp-block-heading {
     margin-bottom: 0.6rem;
+    font-size: 2.4rem;
   }
 
   .page-content p {
       line-height: 1.3;
   }
+
+  .body-child-page .children-page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .body-child-page .children-page ul li a,
+  .body-child-page .parent-page a.parent-link {
+    line-height: 1.2;
+  }
+
+  .child-pages ul li.child-page .inner-content h3.title {
+    line-height: 1.3;
+    margin-bottom: 3rem;
+  }
+
+  .wp-block-table.is-style-stripes tr td:first-child {
+    width: 30%;
+  }
+
+  h1.page-title {
+    line-height: 1.3 !important;
+  }
+
+  h1.aiot-header__title {
+    line-height: 1.2 !important;
+  }
+
+  .aiot-header__content p {
+    line-height: 1.3;
+  }
 }
+
 .history-list {
   padding: 2rem 0;
   [id^="member-history-"] {
